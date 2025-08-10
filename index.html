@@ -3,347 +3,170 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Arush K — VLSI Engineer</title>
+<title>Arush Karingala — VLSI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Portfolio of Arush Karingala — VLSI Engineer & PDK Specialist. PDK, SKY130, Verilog, IoT, ML projects.">
 
 <style>
-  :root {
-    --bg: #f5f8fb;
-    --panel: rgba(255 255 255 / 0.9);
-    --text-primary: #0a1f44;
-    --text-secondary: #4a5a7b;
-    --accent-1: #0071C5; /* Intel Blue */
-    --accent-2: #005A9C;
-    --btn-text: #ffffff;
-    --overlay-dark: rgba(6, 8, 10, 0.15);
-  }
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text-primary);
-    overflow-x: hidden;
-  }
-  a {
-    color: var(--accent-1);
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  img {
-    max-width: 100%;
-    display: block;
-    border-radius: 8px;
-  }
+:root{
+  --bg:#071027;
+  --panel: rgba(12,18,30,0.88);
+  --muted:#9fb0d0;
+  --text:#eaf3ff;
+  --accent:#00a8ff;
+  --accent-2:#00d4ff;
+  --glass: rgba(255,255,255,0.03);
+  --card-shadow: 0 10px 30px rgba(2,10,30,0.6);
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-y:scroll;
+}
+a{color:var(--accent)}
+a:hover{text-decoration:underline}
 
-  /* Background */
-  .bg-wrap {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    filter: brightness(0.85);
-  }
-  .bg-img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(1.05);
-    width: auto;
-    height: 120%;
-    transition: transform 6s ease-out;
-    filter: saturate(1.2);
-  }
-  .bg-overlay {
-    position: absolute;
-    inset: 0;
-    background: var(--overlay-dark);
-  }
-  .bg-lines {
-    position: absolute;
-    inset: 0;
-    opacity: 0.04;
-    background-image:
-      linear-gradient(transparent 15px, rgba(0, 113, 197, 0.1) 16px),
-      linear-gradient(90deg, transparent 15px, rgba(0, 113, 197, 0.1) 16px);
-    background-size: 80px 80px;
-  }
+/* animated wafer / die background (decorative) */
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6d/Microprocessor_die_photo.jpg');
+  background-size:cover; background-position:center; opacity:0.06;
+  filter:grayscale(20%) contrast(90%);
+  animation:dieShift 22s linear infinite;
+}
+@keyframes dieShift{ from{transform:translateY(0)} to{transform:translateY(20px)} }
 
-  .container {
-    position: relative;
-    z-index: 2;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 36px;
-  }
+/* subtle grid overlay */
+.bg-grid{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.06}
+.bg-grid svg{width:100%; height:100%}
 
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .mark {
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
-    background: var(--accent-1);
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    color: white;
-    font-size: 22px;
-    user-select: none;
-  }
-  .logo h1 {
-    margin: 0;
-    font-size: 22px;
-    color: var(--text-primary);
-  }
-  .sub {
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
+.container{position:relative; z-index:2; max-width:1100px; margin:0 auto; padding:36px}
 
-  nav a {
-    color: var(--text-secondary);
-    margin: 0 12px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  nav a:hover {
-    color: var(--accent-1);
-  }
+header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px}
+.logo{display:flex; gap:12px; align-items:center}
+.mark{width:56px; height:56px; border-radius:10px; display:grid; place-items:center; font-weight:800; color:white; background:linear-gradient(180deg,var(--accent),var(--accent-2)); box-shadow:0 6px 20px rgba(0,168,255,0.14); font-size:20px; user-select:none}
+.logo h1{margin:0; font-size:20px; letter-spacing:0.02em; color:var(--text)}
+.sub{font-size:12px; color:var(--muted)}
 
-  /* Hero Intro */
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 28px;
-    align-items: center;
-    min-height: 400px;
-  }
-  @media (max-width: 860px) {
-    .hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
-      text-align: center;
-    }
-  }
-  .hero-text h2 {
-    font-weight: 700;
-    font-size: 36px;
-    margin-bottom: 6px;
-    color: var(--accent-1);
-  }
-  .hero-text p {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-bottom: 24px;
-    max-width: 500px;
-  }
-  .btn-group {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: start;
-  }
-  @media (max-width: 860px) {
-    .btn-group {
-      justify-content: center;
-    }
-  }
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    text-decoration: none;
-    color: var(--btn-text);
-    background: var(--accent-1);
-    box-shadow: 0 4px 10px rgb(0 113 197 / 0.3);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    user-select: none;
-  }
-  .btn:hover,
-  .btn:focus {
-    background: var(--accent-2);
-    box-shadow: 0 6px 16px rgb(0 90 156 / 0.6);
-  }
+nav{display:flex; gap:12px; align-items:center}
+nav a{color:var(--muted); font-size:13px; font-weight:700; text-transform:uppercase; padding:8px 10px; border-radius:8px}
+nav a:hover{color:var(--accent); background:rgba(0,168,255,0.03)}
 
-  /* Card style for sections */
-  .card {
-    background: var(--panel);
-    padding: 20px 24px;
-    border-radius: 10px;
-    box-shadow: 0 8px 30px rgb(0 0 0 / 0.08);
-    margin-bottom: 24px;
-  }
+/* hero */
+.hero{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:center; min-height:420px}
+@media (max-width:880px){ .hero{grid-template-columns:1fr; text-align:center} .hero-photo{order:-1} }
+.hero-text h2{margin:0 0 8px 0; font-size:34px; color:var(--accent); font-weight:700}
+.hero-text p{margin:0 0 20px 0; color:var(--muted); font-size:16px; line-height:1.6; max-width:640px}
+.btn-group{display:flex; gap:14px; flex-wrap:wrap}
+.btn{display:inline-block; padding:10px 18px; border-radius:8px; font-weight:700; background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:white; box-shadow: 0 8px 30px rgba(0,168,255,0.18); text-decoration:none}
+.btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted)}
+.hero-photo img{width:100%; height:auto; border-radius:12px; box-shadow: 0 16px 40px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03); display:block}
+.hero-photo{width:100%; max-width:360px; margin-left:auto}
 
-  /* About section */
-  .about {
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 24px;
-    align-items: center;
-  }
-  @media (max-width: 760px) {
-    .about {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .about img {
-      margin: 0 auto;
-      max-width: 320px;
-    }
-  }
+/* card */
+.card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:20px 24px; border-radius: var(--radius); box-shadow: var(--card-shadow); margin-bottom:22px; border:1px solid rgba(255,255,255,0.03)}
+h2.section{margin:0 0 12px 0; font-size:20px; color:var(--accent); display:flex; align-items:center; gap:10px}
+.title-decor{width:40px; height:6px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:6px}
 
-  /* Experience */
-  .experience-item {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    background: rgba(0, 113, 197, 0.08);
-    padding: 16px 20px;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    box-shadow: inset 0 0 5px rgba(0, 113, 197, 0.15);
-  }
-  .experience-item img {
-    height: 44px;
-    width: auto;
-    object-fit: contain;
-  }
-  .experience-item div {
-    flex: 1;
-  }
-  .experience-item h3 {
-    margin: 0 0 6px 0;
-    font-weight: 700;
-    color: var(--accent-1);
-  }
-  .experience-item span {
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
-  .experience-item ul {
-    margin: 8px 0 0 20px;
-    padding: 0;
-    color: var(--text-primary);
-  }
+.experience-item{display:flex; gap:18px; align-items:flex-start; background: linear-gradient(180deg, rgba(0,168,255,0.02), transparent); padding:14px 16px; border-radius:12px; margin-bottom:14px; border:1px solid rgba(0,168,255,0.04)}
+.experience-item img{height:44px; width:auto; object-fit:contain}
+.experience-item h3{margin:0; color:var(--accent); font-size:16px}
+.experience-item span{font-size:12px; color:var(--muted)}
+.experience-item ul{margin:8px 0 0 18px; color:var(--text)}
 
-  /* Projects */
-  #projects .project-item {
-    background: rgba(0, 113, 197, 0.1);
-    padding: 16px 20px;
-    margin-bottom: 14px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 6px rgba(0, 113, 197, 0.15);
-  }
-  #projects .project-item strong {
-    color: var(--accent-1);
-  }
+/* projects */
+#projects .projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+@media (max-width:880px){#projects .projects-grid{grid-template-columns:1fr}}
+.project-card{background:rgba(255,255,255,0.018); padding:14px 16px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); cursor:pointer; transition:transform .18s ease, box-shadow .18s ease}
+.project-card:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,168,255,0.06)}
+.project-card strong{color:var(--accent)}
+.project-card .meta{color:var(--muted); font-size:13px; margin-top:8px}
 
-  /* Certifications */
-  #certifications .cert-item {
-    background: rgba(0, 113, 197, 0.05);
-    padding: 14px 18px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-  }
-  #certifications .cert-item a {
-    color: var(--accent-2);
-    font-weight: 600;
-  }
-  #certifications .cert-item a:hover {
-    text-decoration: underline;
-  }
+/* modal */
+.modal-backdrop{position:fixed; inset:0; background:rgba(2,6,12,0.6); display:flex; align-items:center; justify-content:center; z-index:9999; padding:24px}
+.modal{background:var(--panel); width:min(880px,98%); max-height:86vh; overflow:auto; border-radius:12px; padding:20px; box-shadow:0 30px 80px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.04)}
+.modal h3{margin-top:0; color:var(--accent)}
+.modal p{color:var(--text); line-height:1.6}
+.modal .close{display:inline-block; margin-left:auto; background:transparent; border:none; color:var(--muted); font-weight:700; cursor:pointer}
 
-  /* Footer */
-  footer {
-    margin-top: 32px;
-    padding: 18px;
-    border-radius: 10px;
-    background: rgba(0, 113, 197, 0.1);
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 14px;
-  }
+/* certifications */
+.cert-item{background:rgba(255,255,255,0.02); padding:12px 14px; margin-bottom:10px; border-radius:8px}
+.cert-item a{color:var(--accent-2); font-weight:700}
 
-  /* Animated intro */
-  .intro-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--accent-1);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    font-family: 'Inter', sans-serif;
-    animation: introFadeOut 2.5s ease forwards;
-    animation-delay: 2.5s;
-  }
-  .intro-overlay h1 {
-    font-size: 48px;
-    font-weight: 900;
-    margin: 0;
-    letter-spacing: 0.15em;
-    filter: drop-shadow(0 0 6px rgb(255 255 255 / 0.5));
-  }
-  .intro-overlay .sub {
-    margin-top: 12px;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-  }
+/* contact */
+footer{margin-top:26px; padding:18px; border-radius:10px; background:linear-gradient(90deg, rgba(0,168,255,0.025), transparent); text-align:center; color:var(--muted); font-size:13px}
 
-  @keyframes introFadeOut {
-    to {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-  }
+/* print style - optimized for PDF/print */
+@media print{
+  body{background:white; color:black}
+  body::before{display:none}
+  .bg-grid{display:none}
+  nav, .btn, .intro-overlay, footer{display:none}
+  .container{padding:0; max-width:none}
+  .card{background:white; box-shadow:none; border:0; padding:0 0 12px 0}
+  h1,h2{color:black}
+  a::after{content: " (" attr(href) ")"; font-size:11px; color:#333}
+}
+
+/* accessibility focus */
+:focus{outline:3px solid rgba(0,168,255,0.12); outline-offset:2px}
+
 </style>
 </head>
-
 <body>
 
-<!-- Animated Intro -->
-<div class="intro-overlay" id="introOverlay">
-  <h1>ARUSH K.</h1>
-  <div class="sub">VLSI Engineer & PDK Specialist</div>
-</div>
-
-<div class="bg-wrap" aria-hidden="true">
-  <img id="bgImage" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1471&q=80" alt="" class="bg-img" />
-  <div class="bg-overlay"></div>
-  <div class="bg-lines"></div>
+<!-- decorative grid overlay -->
+<div class="bg-grid" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#00334a" stop-opacity="0.06"/><stop offset="1" stop-color="#001d2b" stop-opacity="0.02"/></linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#g)"/>
+    <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+      <!-- vertical lines -->
+      <!-- generated in code when file served; static here for performance -->
+      <line x1="80" y1="0" x2="80" y2="900" />
+      <line x1="160" y1="0" x2="160" y2="900" />
+      <line x1="240" y1="0" x2="240" y2="900" />
+      <line x1="320" y1="0" x2="320" y2="900" />
+      <line x1="400" y1="0" x2="400" y2="900" />
+      <line x1="480" y1="0" x2="480" y2="900" />
+      <line x1="560" y1="0" x2="560" y2="900" />
+      <line x1="640" y1="0" x2="640" y2="900" />
+      <line x1="720" y1="0" x2="720" y2="900" />
+      <line x1="800" y1="0" x2="800" y2="900" />
+      <line x1="880" y1="0" x2="880" y2="900" />
+      <line x1="960" y1="0" x2="960" y2="900" />
+      <line x1="1040" y1="0" x2="1040" y2="900" />
+      <line x1="1120" y1="0" x2="1120" y2="900" />
+      <line x1="1200" y1="0" x2="1200" y2="900" />
+      <line x1="1280" y1="0" x2="1280" y2="900" />
+      <line x1="1360" y1="0" x2="1360" y2="900" />
+      <line x1="1440" y1="0" x2="1440" y2="900" />
+    </g>
+  </svg>
 </div>
 
 <div class="container" role="main">
-
   <header>
     <div class="logo" aria-label="Website Logo and Name">
       <div class="mark" aria-hidden="true">A</div>
-      <h1>Arush K.</h1>
+      <div>
+        <h1>Arush Karingala</h1>
+        <div class="sub">VLSI Engineer • PDK Specialist</div>
+      </div>
     </div>
-    <nav aria-label="Primary Navigation">
+
+    <nav aria-label="Primary navigation">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
@@ -352,30 +175,34 @@
     </nav>
   </header>
 
+  <!-- HERO -->
   <section class="hero" aria-label="Introduction">
     <div class="hero-text">
-      <h2>Hello, I'm Arush K.</h2>
-      <p>Passionate VLSI Engineer specializing in PDK development with experience at Intel and Cadence Design Systems.</p>
-      <div class="btn-group">
-        <a href="resume.pdf" target="_blank" rel="noopener" class="btn" aria-label="Open Resume PDF">Resume</a>
-        <a href="https://linkedin.com/in/arushkaringala" target="_blank" rel="noopener" class="btn" aria-label="Visit LinkedIn Profile">LinkedIn</a>
+      <h2>Hello, I'm Arush Karingala</h2>
+      <p>Passionate VLSI Engineer specializing in PDK development with experience at Intel and Cadence Design Systems. I work on PDK flows, SPICE simulations, RTL & verification, IoT edge systems and ML tooling for semiconductor workflows.</p>
+
+      <div class="btn-group" role="group" aria-label="Primary actions">
+        <a class="btn" href="resume.pdf" target="_blank" rel="noopener" aria-label="Open Resume">Resume</a>
+        <a class="btn ghost" href="https://linkedin.com/in/arushkaringala" target="_blank" rel="noopener" aria-label="Visit LinkedIn">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/arushkaringala" target="_blank" rel="noopener" aria-label="Visit GitHub">GitHub</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="photo.jpg" alt="Photo of Arush K." />
+
+    <div class="hero-photo" aria-hidden="false">
+      <img src="photo.jpg" alt="Photo of Arush Karingala" loading="lazy" />
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section id="about" class="card" aria-labelledby="aboutHeading">
-    <h2 id="aboutHeading">About Me</h2>
-    <p>
-      I hold an M.Tech in Electronics and Communication Engineering from NIT Warangal and have worked as a PDK Engineer at Cadence and interned at Intel.  
-      My expertise is in VLSI design, process design kits, and semiconductor technology.
-    </p>
+    <h2 class="section"><span class="title-decor" aria-hidden="true"></span> <span id="aboutHeading">About Me</span></h2>
+    <p>I hold an M.Tech in Electronics and Communication Engineering from NIT Warangal and have worked as a PDK Engineer at Cadence and interned at Intel. My expertise is in VLSI design, Process Design Kits (PDKs), SPICE flow automation, and semiconductor process integration.</p>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience" class="card" aria-labelledby="experienceHeading">
-    <h2 id="experienceHeading">Experience</h2>
+    <h2 class="section"><span class="title-decor" aria-hidden="true"></span> <span id="experienceHeading">Experience</span></h2>
+
     <div class="experience-item" role="article" aria-label="Experience at Cadence Design Systems">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Cadence_Design_Systems_logo.svg/320px-Cadence_Design_Systems_logo.svg.png" alt="Cadence Design Systems Logo" />
       <div>
@@ -388,7 +215,8 @@
         </ul>
       </div>
     </div>
-    <div class="experience-item" role="article" aria-label="Experience Internship at Intel">
+
+    <div class="experience-item" role="article" aria-label="Internship at Intel">
       <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Intel-logo.svg" alt="Intel Logo" />
       <div>
         <h3>Intern - Intel Corporation</h3>
@@ -401,68 +229,133 @@
     </div>
   </section>
 
+  <!-- PROJECTS (interactive) -->
   <section id="projects" class="card" aria-labelledby="projectsHeading">
-    <h2 id="projectsHeading">Projects</h2>
+    <h2 class="section"><span class="title-decor" aria-hidden="true"></span> <span id="projectsHeading">Projects</span></h2>
 
-    <div class="project-item" role="article" aria-label="Cadence PDK Development Project">
-      <strong>Cadence PDK Development</strong><br />
-      Developed and validated advanced Process Design Kits at Cadence Design Systems to support cutting-edge semiconductor designs.
-    </div>
+    <div class="projects-grid">
+      <div class="project-card" tabindex="0" data-project="p1" role="button" aria-pressed="false">
+        <strong>Analysis of CMOS Inverter Characteristics using SkyWater SKY130 PDK and Ngspice SPICE simulator</strong>
+        <div class="meta">Analysis of VTC, MOS characteristics, noise analysis, power simulation of CMOS inverter.</div>
+      </div>
 
-    <div class="project-item" role="article" aria-label="Intel Semiconductor Process Improvement Project">
-      <strong>Intel Semiconductor Process Improvement</strong><br />
-      Interned at Intel working on automation and characterization of semiconductor process nodes to improve yield and reliability.
-    </div>
+      <div class="project-card" tabindex="0" data-project="p2" role="button" aria-pressed="false">
+        <strong>Vending machine in Verilog</strong>
+        <div class="meta">Implemented Vending machine using Verilog HDL in Xilinx Vivado.</div>
+      </div>
 
-    <div class="project-item" role="article" aria-label="Personal Website Development">
-      <strong>Personal Website Development</strong><br />
-      Designed and implemented this personal portfolio website with a modern, professional theme, animations, and live GitHub integration.
+      <div class="project-card" tabindex="0" data-project="p3" role="button" aria-pressed="false">
+        <strong>Fall detector using IoT</strong>
+        <div class="meta">Detects a fall and reports it via Google Firebase to a mobile app developed using Kodular rapid mobile app development utility.</div>
+      </div>
+
+      <div class="project-card" tabindex="0" data-project="p4" role="button" aria-pressed="false">
+        <strong>Machine Learning Techniques to Predict the risk of Heart Attack</strong>
+        <div class="meta">Served as a team leader at Advanced Academic Centre (AAC) to build an ML model using logistic regression statistical model to predict the risk of a heart attack by taking various attributes like resting blood sugar, maximum heart rate and many more.</div>
+      </div>
     </div>
   </section>
 
+  <!-- CERTIFICATIONS -->
   <section id="certifications" class="card" aria-labelledby="certificationsHeading">
-    <h2 id="certificationsHeading">Certifications</h2>
+    <h2 class="section"><span class="title-decor" aria-hidden="true"></span> <span id="certificationsHeading">Certifications</span></h2>
     <div class="cert-item" role="article">
-      <a href="https://www.coursera.org/account/accomplishments/verify/ABC123" target="_blank" rel="noopener">VLSI Design Specialization - Coursera</a><br />
-      Issued: March 2024
+      <a href="https://www.coursera.org/account/accomplishments/verify/ABC123" target="_blank" rel="noopener">VLSI Design Specialization - Coursera</a><br/>Issued: March 2024
     </div>
     <div class="cert-item" role="article">
-      <a href="https://www.edx.org/certificates/XYZ456" target="_blank" rel="noopener">Advanced Digital Circuits - edX</a><br />
-      Issued: December 2023
+      <a href="https://www.edx.org/certificates/XYZ456" target="_blank" rel="noopener">Advanced Digital Circuits - edX</a><br/>Issued: December 2023
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="card" aria-labelledby="contactHeading">
-    <h2 id="contactHeading">Contact Me</h2>
-    <p>Email: <a href="mailto:arush@example.com">arush@example.com</a></p>
+    <h2 class="section"><span class="title-decor" aria-hidden="true"></span> <span id="contactHeading">Contact Me</span></h2>
+    <p>Email: <a href="mailto:ka22ecm3r01@student.nitw.ac.in">ka22ecm3r01@student.nitw.ac.in</a></p>
     <p>GitHub: <a href="https://github.com/arushkaringala" target="_blank" rel="noopener">github.com/arushkaringala</a></p>
   </section>
 
+  <footer>&copy; <span id="year"></span> Arush Karingala · Built with care for silicon & code.</footer>
 </div>
 
+<!-- Modal template -->
+<template id="modalTpl">
+  <div class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal" role="document">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+        <h3></h3>
+        <button class="close" aria-label="Close modal">Close</button>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</template>
+
 <script>
-  // Animate background zoom in slowly
-  const bgImage = document.getElementById('bgImage');
-  let scale = 1.05;
-  let scaleDirection = 1;
-  setInterval(() => {
-    scale += scaleDirection * 0.0002;
-    if (scale > 1.1) scaleDirection = -1;
-    if (scale < 1.05) scaleDirection = 1;
-    bgImage.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(4)})`;
-  }, 40);
+// set year
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Hide intro after animation
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const intro = document.getElementById('introOverlay');
-      intro.style.opacity = 0;
-      intro.style.pointerEvents = 'none';
-      intro.style.visibility = 'hidden';
-    }, 5000); // 2.5s animation + 2.5s delay
-  });
+// Projects content map (exact text provided by user)
+const projects = {
+  p1: {
+    title: 'Analysis of CMOS Inverter Characteristics using SkyWater SKY130 PDK and Ngspice SPICE simulator',
+    body: 'Analysis of VTC, MOS characteristics, noise analysis, power simulation of CMOS inverter.'
+  },
+  p2: {
+    title: 'Vending machine in Verilog',
+    body: 'Implemented Vending machine using Verilog HDL in Xilinx Vivado.'
+  },
+  p3: {
+    title: 'Fall detector using IoT',
+    body: "Detects a fall and reports it via Google Firebase to a mobile app developed using Kodular rapid mobile app development utility."
+  },
+  p4: {
+    title: 'Machine Learning Techniques to Predict the risk of Heart Attack',
+    body: 'Served as a team leader at Advanced Academic Centre (AAC) to build an ML model using logistic regression statistical model to predict the risk of a heart attack by taking various attributes like resting blood sugar, maximum heart rate and many more.'
+  }
+};
+
+// Modal open/close logic
+function openModal(projectKey){
+  const tpl = document.getElementById('modalTpl');
+  const clone = tpl.content.cloneNode(true);
+  const backdrop = clone.querySelector('.modal-backdrop');
+  const modal = clone.querySelector('.modal');
+  const titleEl = clone.querySelector('h3');
+  const bodyEl = clone.querySelector('.modal-body');
+  const closeBtn = clone.querySelector('.close');
+
+  const data = projects[projectKey];
+  titleEl.textContent = data.title;
+  bodyEl.textContent = data.body;
+
+  // append
+  document.body.appendChild(backdrop);
+
+  // focus management
+  closeBtn.focus();
+  function close(){
+    backdrop.remove();
+    // return focus to the originating card
+    const origin = document.querySelector(`[data-project="${projectKey}"]`);
+    if(origin) origin.focus();
+  }
+
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) close(); });
+  // escape key
+  function onKey(e){ if(e.key==='Escape') { close(); document.removeEventListener('keydown', onKey); } }
+  document.addEventListener('keydown', onKey);
+}
+
+// wire project cards
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('click', ()=> openModal(card.dataset.project));
+  card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openModal(card.dataset.project); } });
+});
+
+// Improve keyboard accessibility for modal close button and trap basic focus (simple)
+// For production, consider a robust focus-trap library.
+
 </script>
-
 </body>
 </html>
-
