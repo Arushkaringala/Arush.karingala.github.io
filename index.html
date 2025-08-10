@@ -1,463 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Arush Karingala — VLSI Engineer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arush Karingala - VLSI Engineer</title>
 <style>
-  :root{
-    --bg:#0b0b0d;
-    --panel: rgba(11,11,13,0.78);
-    --muted:#9aa0a6;
-    --intel: #0071C5;
-    --intel-dark: #005A9C;
-    --tsmc: #C71F2D;
-    --tsmc-dark: #9B1722;
-    --btn-text: #fff;
-    --glass: rgba(255,255,255,0.04);
+  /* Basic resets and dark theme */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #ddd;
+    overflow-x: hidden;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:#e7eef6;overflow-x:hidden; -webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
-
-  /* split background */
-  .bg-wrap{position:fixed;inset:0;z-index:0;display:grid;grid-template-rows:50% 50%;pointer-events:none}
-  .bg-top,.bg-bottom{position:relative;overflow:hidden}
-  .bg-top img,.bg-bottom img{
-    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.12);
-    width:auto;height:120%;filter:blur(5px) brightness(0.35) saturate(1.1);transition:transform 8s linear;
+  header {
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(90deg, #d97429, #b45b1b);
+    color: #fff;
+    user-select: none;
   }
-  .bg-overlay{position:absolute;inset:0;background:linear-gradient(rgba(3,6,10,0.5), rgba(3,6,10,0.55));}
-  .bg-top::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,11,13,0.55) 0%, rgba(11,11,13,0.2) 70%);}
-  .bg-bottom::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,11,13,0.2) 0%, rgba(11,11,13,0.7) 100%);}
-
-  /* container & header */
-  .container{position:relative;z-index:5;max-width:1100px;margin:0 auto;padding:32px}
-  header{position:sticky;top:18px;z-index:10;margin:18px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--panel);padding:10px 16px;border-radius:12px;backdrop-filter:blur(6px)}
-  .logo{display:flex;align-items:center;gap:12px}
-  .mark{width:48px;height:48px;border-radius:8px;background:var(--intel);display:grid;place-items:center;font-weight:700;color:white;cursor:pointer;user-select:none;transition:transform .25s ease}
-  .mark:active{transform:scale(.96)}
-  h1{margin:0;font-size:20px;color:#e7eef6}
-  nav{display:flex;gap:12px;align-items:center}
-  nav a{color:var(--muted);font-weight:600;padding:6px 8px;border-radius:6px}
-  nav a:hover, nav a:focus{color:var(--intel);outline:none;background:rgba(255,255,255,0.02)}
-  .controls{display:flex;gap:8px;align-items:center}
-  .theme-toggle{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:6px 8px;border-radius:8px;color:var(--muted);cursor:pointer}
-  .theme-toggle:focus{outline:2px solid rgba(0,113,197,0.25)}
-
-  /* intro overlay */
-  .intro{position:fixed;inset:0;z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--intel),var(--intel-dark));color:white;gap:18px;pointer-events:auto}
-  .intro h1{margin:0;font-size:44px;letter-spacing:0.12em}
-  .intro p{margin:0;font-weight:600;opacity:.95}
-  .intro .buttons{display:flex;gap:12px}
-  .intro .btn{padding:12px 18px;border-radius:10px;background:white;color:var(--intel);font-weight:700;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
-  .intro .btn.secondary{background:transparent;color:white;border:1px solid rgba(255,255,255,0.18)}
-  .intro[data-hidden="true"]{pointer-events:none;opacity:0;transition:opacity .8s ease}
-
-  /* main card (content area) */
-  main.site{position:relative;z-index:6;margin-top:18px}
-  .hero{display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:center;margin-bottom:22px}
-  @media(max-width:860px){.hero{grid-template-columns:1fr}}
-  .panel{background:var(--panel);padding:18px;border-radius:12px;backdrop-filter:blur(6px);box-shadow:0 10px 30px rgba(0,0,0,0.5)}
-  .hero h2{margin:0;color:var(--intel);font-size:28px}
-  .hero p{color:var(--muted);margin:8px 0 12px 0}
-
-  .hero .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--intel);color:var(--btn-text);font-weight:700;text-decoration:none}
-  .hero .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
-  .photo{width:100%;max-width:320px;border-radius:12px;overflow:hidden}
-  .photo img{width:100%;height:auto;display:block}
-
-  /* sections & reveal */
-  section{margin-top:20px;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
-  section.visible{opacity:1;transform:none}
-
-  h2.section-title{color:var(--intel);margin-bottom:12px}
-
-  /* Experience */
-  .experience-item{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:10px;background:var(--glass);margin-bottom:12px}
-  .experience-item img{height:42px;width:auto;border-radius:6px}
-  .experience-item strong{display:block;color:#fff}
-  .experience-item .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
-
-  /* Projects - expandable */
-  .project {background:var(--glass);padding:12px;border-radius:10px;margin-bottom:12px;cursor:pointer;transition:transform .18s ease,box-shadow .18s}
-  .project:hover{transform:translateY(-6px);box-shadow:0 16px 30px rgba(0,0,0,0.45)}
-  .project .title{font-weight:700;color:var(--intel)}
-  .project .short{color:var(--muted)}
-  .project .detail{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
-  .project.expanded .detail{max-height:420px;padding-top:10px}
-
-  /* Skills bars */
-  .skills{display:flex;gap:12px;flex-wrap:wrap}
-  .skill{flex:1 1 140px;background:rgba(255,255,255,0.03);padding:10px;border-radius:8px}
-  .skill .label{font-size:13px;color:var(--muted);margin-bottom:8px}
-  .bar{height:10px;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden}
-  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--intel),var(--intel-dark));border-radius:6px;transition:width 1s cubic-bezier(.2,.9,.3,1)}
-
-  /* Certifications collapsible */
-  .cert-toggle{display:flex;align-items:center;gap:12px;cursor:pointer;color:var(--muted);user-select:none;margin-bottom:8px}
-  .cert-list{max-height:0;overflow:hidden;transition:max-height .45s ease}
-  .cert-list.open{max-height:1000px}
-
-  /* contact */
-  .contact{display:flex;gap:12px;flex-direction:column}
-  .mailto{color:var(--intel);font-weight:600}
-
-  footer{margin-top:28px;padding:18px 8px;color:var(--muted);font-size:13px;text-align:center}
-
-  /* small helper */
-  .muted{color:var(--muted)}
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 3rem;
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  h2 {
+    border-bottom: 2px solid #d97429;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  a {
+    color: #d97429;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover,
+  a:focus {
+    color: #b45b1b;
+    text-decoration: underline;
+  }
+  /* Projects & Publications list */
+  ul.project-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  ul.project-list li {
+    margin-bottom: 1rem;
+  }
+  /* Resume placeholder */
+  #resume {
+    background: #1e1e1e;
+    padding: 1rem;
+    border-radius: 8px;
+  }
 </style>
 </head>
 <body>
 
-<!-- Intro: shows on load, then hides -->
-<div class="intro" id="introOverlay" role="dialog" aria-label="Intro">
-  <h1>ARUSH KARINGALA</h1>
-  <p>VLSI Engineer — PDK & Chip Design</p>
-  <div class="buttons">
-    <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
-    <a class="btn secondary" href="https://www.linkedin.com/in/arush-karingala/" target="_blank" rel="noopener">LinkedIn</a>
-  </div>
-</div>
+<header>
+  <h1>Arush Karingala</h1>
+  <p>Passionate VLSI Engineer | PDK Engineering at Cadence Design Systems</p>
+</header>
 
-<!-- Split foundry backgrounds -->
-<div class="bg-wrap" aria-hidden="true">
-  <div class="bg-top">
-    <img id="bgTop" src="wafer.jpg" alt="silicon wafer background">
-    <div class="bg-overlay"></div>
-  </div>
-  <div class="bg-bottom">
-    <img id="bgBottom" src="die.jpg" alt="chip die background">
-    <div class="bg-overlay"></div>
-  </div>
-</div>
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      M.Tech in Electronics and Communication Engineering from NIT Warangal. Completed a one-year internship at Intel. Currently working as a PDK Engineer at Cadence Design Systems.
+    </p>
+  </section>
 
-<!-- sticky header -->
-<div class="container" aria-hidden="false">
-  <header role="banner">
-    <div class="logo" title="Arush Karingala">
-      <div class="mark" id="logoMark">AK</div>
-      <div>
-        <h1>Arush Karingala</h1>
-        <div class="muted" style="font-size:12px">PDK Engineer · VLSI · Chip Design</div>
-      </div>
-    </div>
+  <section id="projects">
+    <h2>Projects & Publications</h2>
+    <ul class="project-list">
+      <li><strong>Project A:</strong> Description of project A showcasing VLSI design skills.</li>
+      <li><strong>Project B:</strong> Description of project B with a focus on chip design and verification.</li>
+      <li><strong>Publication 1:</strong> Paper on advanced semiconductor processes.</li>
+      <!-- Add your actual projects and publications here -->
+    </ul>
+  </section>
 
-    <nav role="navigation" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#certs">Certifications</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:arush@example.com">arush@example.com</a></p>
+    <p>GitHub: <a href="https://github.com/arushkaringala" target="_blank" rel="noopener noreferrer">github.com/arushkaringala</a></p>
+  </section>
+</main>
 
-    <div class="controls" role="toolbar" aria-label="Theme controls">
-      <button class="theme-toggle" id="themeBtn" aria-pressed="false" title="Toggle theme">Theme</button>
-    </div>
-  </header>
-
-  <main class="site" role="main">
-    <!-- Hero -->
-    <section class="hero panel" id="heroSection">
-      <div>
-        <h2>Hello — I'm Arush Karingala</h2>
-        <p>PDK Engineer with hands-on experience in Cadence & Intel environments. I build automation for PDKs, run PV flows, and enable foundry-ready collaterals.</p>
-        <div style="margin-top:12px">
-          <a href="resume.pdf" class="btn" target="_blank" rel="noopener">Resume</a>
-          <a href="https://www.linkedin.com/in/arush-karingala/" class="btn secondary" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-        <div style="margin-top:18px">
-          <strong class="muted">Skills</strong>
-          <div class="skills" aria-hidden="false" style="margin-top:8px">
-            <div class="skill">
-              <div class="label">Verilog / HDL</div>
-              <div class="bar"><i data-value="80%"></i></div>
-            </div>
-            <div class="skill">
-              <div class="label">PDK / EDA Automation</div>
-              <div class="bar"><i data-value="78%"></i></div>
-            </div>
-            <div class="skill">
-              <div class="label">Python</div>
-              <div class="bar"><i data-value="72%"></i></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="photo panel" aria-hidden="false">
-        <img src="photo.jpg" alt="Arush Karingala photo" style="width:100%;height:auto;object-fit:cover">
-      </aside>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="panel" aria-labelledby="aboutHeading">
-      <h2 id="aboutHeading" class="section-title">About</h2>
-      <p class="muted">I have an M.Tech in ECE from NIT Warangal. My background spans PDK engineering, PV automation, and pre/post-silicon validation. I enjoy writing robust automation that saves teams time and reduces silicon respins.</p>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" class="panel" aria-labelledby="expHeading">
-      <h2 id="expHeading" class="section-title">Experience</h2>
-
-      <div class="experience-item" tabindex="0">
-        <img src="cadence.png" alt="Cadence logo">
-        <div>
-          <strong>PDK Engineer — Cadence Design Systems</strong>
-          <div class="meta">Jul 2024 – Present</div>
-          <ul>
-            <li>Work on PDK collaterals across foundries and nodes.</li>
-            <li>Develop PV automation workflows and QA tests.</li>
-            <li>Integrate PDKs into EDA flows for customers.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="experience-item" tabindex="0">
-        <img src="intel.png" alt="Intel logo">
-        <div>
-          <strong>Intern — Intel Corporation</strong>
-          <div class="meta">May 2023 – May 2024</div>
-          <ul>
-            <li>Delivered behavioral/functional models and test infrastructure.</li>
-            <li>Led pre-silicon efforts to support post-silicon validation.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="panel" aria-labelledby="projHeading">
-      <h2 id="projHeading" class="section-title">Projects & Publications</h2>
-
-      <article class="project" tabindex="0" aria-expanded="false">
-        <div class="title">Analysis of VTC, MOS characteristics, noise analysis, power simulation of CMOS inverter.</div>
-        <div class="short muted">Used Sky130 PDK and NGspice to analyze device characteristics and power/noise trade-offs.</div>
-        <div class="detail">
-          <p class="muted">Detailed study included DC operating points, small-signal noise analysis, and transient power measurement for inverter gates across sizing variations.</p>
-        </div>
-      </article>
-
-      <article class="project" tabindex="0" aria-expanded="false">
-        <div class="title">Vending Machine in Verilog</div>
-        <div class="short muted">Implemented FSM and testbench in Verilog; synthesized and simulated in Xilinx Vivado.</div>
-        <div class="detail">
-          <p class="muted">Features include coin insertion, change calculation, and product selection with state minimization and comprehensive testbench coverage.</p>
-        </div>
-      </article>
-
-      <article class="project" tabindex="0" aria-expanded="false">
-        <div class="title">Fall Detector using IoT</div>
-        <div class="short muted">Detects falls and reports via Google Firebase to a Kodular mobile app.</div>
-        <div class="detail">
-          <p class="muted">Implemented accelerometer-based detection logic, thresholds tuned experimentally, and secure push notification pipeline via Firebase.</p>
-        </div>
-      </article>
-
-      <article class="project" tabindex="0" aria-expanded="false">
-        <div class="title">Machine Learning: Heart Attack Risk Prediction</div>
-        <div class="short muted">Led a team to build a logistic regression model using AAC datasets.</div>
-        <div class="detail">
-          <p class="muted">Preprocessing, feature selection, model training, ROC/AUC evaluation and deployment notes included.</p>
-        </div>
-      </article>
-    </section>
-
-    <!-- Certifications (collapsible) -->
-    <section id="certs" class="panel" aria-labelledby="certsHeading">
-      <h2 id="certsHeading" class="section-title">Certifications</h2>
-
-      <div class="cert-toggle" id="certToggle" role="button" tabindex="0" aria-expanded="false">
-        <strong>Show / hide certifications</strong>
-      </div>
-
-      <div class="cert-list" id="certList" aria-hidden="true">
-        <div class="card cert-card">
-          <div><strong>SKILL Language Programming Introduction vIC23.1 Exam</strong> — Cadence</div>
-          <a href="https://www.credly.com/badges/71edc995-c045-46f4-9fa5-778470c2e7d8/linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>VLSI to System Design: Silicon to End Application Approach</strong> — Arm India</div>
-          <a href="https://www.credential.net/0ebb0c6d-97a4-438f-abdc-9acec4842a50" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>Hardware Description Languages for FPGA Design (Verilog)</strong> — Coursera</div>
-          <a href="https://coursera.org/share/940b673e65cd27c830bd02e75e99a9d4" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>CyberOps Associate</strong> — Cisco</div>
-          <a href="https://www.credly.com/badges/d618d45f-5d34-4f1d-8e86-180ca02db38c/linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>Introduction to Cybersecurity</strong> — Cisco</div>
-          <a href="https://www.credly.com/badges/83874c5d-6372-4558-8c84-cd0415648705?source=linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>Introduction to Packet Tracer</strong> — Cisco</div>
-          <a href="https://www.credly.com/badges/405f807a-33ec-473a-89a9-2c9293af4ebc/linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>AWS Academy Graduate - Cloud Foundations</strong> — AWS</div>
-          <a href="https://www.youracclaim.com/badges/5ecf1ce0-5707-49f1-bb88-35e504b4e0fb?source=linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>Object Oriented Programming in Java</strong> — Coursera</div>
-          <a href="https://coursera.org/share/b3e572fe13b7664f36fdd3c225a4f968" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>CCNA: Enterprise Networking, Security, and Automation</strong> — Cisco</div>
-          <a href="https://www.youracclaim.com/badges/1c0a5762-80e6-4b6e-ad2d-59b3dee7a05f?source=linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>Machine Learning</strong> — Coursera</div>
-          <a href="https://www.coursera.org/account/accomplishments/certificate/AX4N2TCNNKPN" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>CCNA: Introduction to Networks</strong> — Cisco</div>
-          <a href="https://www.youracclaim.com/badges/9c3bfa59-3dc8-4d09-9302-4009fb7544dc/linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-
-        <div class="card cert-card">
-          <div><strong>CCNA: Switching, Routing, and Wireless Essentials</strong> — Cisco</div>
-          <a href="https://www.youracclaim.com/badges/ba40e9a4-ec91-40fb-bd99-e4dea05313e2/linked_in_profile" target="_blank" rel="noopener">View Credential</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="panel" aria-labelledby="contactHeading">
-      <h2 id="contactHeading" class="section-title">Contact</h2>
-      <div class="contact">
-        <div>Email: <a class="mailto" href="mailto:ka22ecm3r01@student.nitw.ac.in">ka22ecm3r01@student.nitw.ac.in</a></div>
-        <div class="muted">Phone: +91-7013065248</div>
-      </div>
-    </section>
-
-    <footer>
-      © 2025 Arush Karingala — Built for VLSI & PDK work
-    </footer>
-  </main>
-</div>
+<!-- Intro Canvas Animation -->
+<canvas id="introCanvas" aria-label="Intro circuit particle animation" role="img" style="position:fixed; inset:0; width:100%; height:100%; z-index:9999; background: linear-gradient(135deg, #b45b1b, #d97429);"></canvas>
 
 <script>
-/* --- Intro hide after a short time --- */
-const intro = document.getElementById('introOverlay') || document.querySelector('.intro');
-if(intro){
-  // keep pointer-events enabled only initially
-  setTimeout(()=> {
-    intro.setAttribute('data-hidden','true');
-    // fully remove from DOM after fade
-    setTimeout(()=> intro.style.display='none',900);
-  }, 2200);
-}
+(() => {
+  const canvas = document.getElementById('introCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, nodes = [], maxDistance = 120;
 
-/* --- slow background subtle motion (parallax-ish) --- */
-const topImg = document.getElementById('bgTop');
-const bottomImg = document.getElementById('bgBottom');
-let t = 0;
-function animateBg(){
-  t += 0.002; // speed
-  const s1 = 1.12 + Math.sin(t)/140;
-  const s2 = 1.08 + Math.cos(t)/160;
-  if(topImg) topImg.style.transform = `translate(-50%,-50%) scale(${s1.toFixed(4)})`;
-  if(bottomImg) bottomImg.style.transform = `translate(-50%,-50%) scale(${s2.toFixed(4)})`;
-  requestAnimationFrame(animateBg);
-}
-animateBg();
-
-/* --- reveal-on-scroll --- */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('visible');
-  });
-},{threshold:0.12});
-document.querySelectorAll('section, .experience-item, .project').forEach(el=>io.observe(el));
-
-/* --- skill bars animate --- */
-document.addEventListener('DOMContentLoaded', ()=>{
-  document.querySelectorAll('.bar > i').forEach(el=>{
-    const val = el.getAttribute('data-value') || '60%';
-    // delay each slightly
-    setTimeout(()=> el.style.width = val, 350);
-  });
-});
-
-/* --- projects expand/collapse --- */
-document.querySelectorAll('.project').forEach(p=>{
-  p.addEventListener('click', () => {
-    const expanded = p.classList.toggle('expanded');
-    p.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-  });
-  // keyboard enter/space to toggle
-  p.addEventListener('keydown', e=>{
-    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); p.click(); }
-  });
-});
-
-/* --- certifications toggle --- */
-const certToggle = document.getElementById('certToggle');
-const certList = document.getElementById('certList');
-if(certToggle && certList){
-  function toggleCerts(){
-    const open = certList.classList.toggle('open');
-    certToggle.setAttribute('aria-expanded', open);
-    certList.setAttribute('aria-hidden', !open);
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * devicePixelRatio;
+    canvas.height = height * devicePixelRatio;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
   }
-  certToggle.addEventListener('click', toggleCerts);
-  certToggle.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); toggleCerts(); }});
-}
+  window.addEventListener('resize', resize);
+  resize();
 
-/* --- theme toggle (intel/tsmc) with localStorage --- */
-const themeBtn = document.getElementById('themeBtn');
-const root = document.documentElement;
-const THEMES = {
-  intel: {'--accent-1':'#0071C5','--accent-2':'#005A9C','--panel':'rgba(11,11,13,0.78)'},
-  tsmc: {'--accent-1':'#C71F2D','--accent-2':'#9B1722','--panel':'rgba(20,10,10,0.82)'}
-};
-function applyTheme(name){
-  const theme = THEMES[name];
-  if(!theme) return;
-  Object.entries(theme).forEach(([k,v])=>root.style.setProperty(k,v));
-  localStorage.setItem('theme', name);
-  themeBtn.setAttribute('aria-pressed', name==='tsmc' ? 'true' : 'false');
-}
-themeBtn.addEventListener('click', ()=>{
-  const current = localStorage.getItem('theme') || 'intel';
-  applyTheme(current === 'intel' ? 'tsmc' : 'intel');
-});
-// initialize
-applyTheme(localStorage.getItem('theme') || 'intel');
+  class Node {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.radius = 2 + Math.random() * 1.5;
+      this.opacity = 0.7 + Math.random() * 0.3;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * 3);
+      gradient.addColorStop(0, `rgba(217,116,41,${this.opacity})`);
+      gradient.addColorStop(1, 'rgba(217,116,41,0)');
+      ctx.fillStyle = gradient;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
 
-/* --- smooth scroll for nav --- */
-document.querySelectorAll('nav a').forEach(a=>{
-  a.addEventListener('click', (e)=>{
-    e.preventDefault();
-    const id = a.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-  });
-});
+  // Initialize nodes (~60)
+  for (let i = 0; i < 60; i++) nodes.push(new Node());
 
-/* --- small logo interaction --- */
-const logoMark = document.getElementById('logoMark');
-if(logoMark) logoMark.addEventListener('click', ()=> {
-  logoMark.animate([{transform:'rotate(0) scale(1)'},{transform:'rotate(10deg) scale(1.12)'},{transform:'rotate(0) scale(1)'}],{duration:600,easing:'ease-in-out'});
-});
+  function drawLines() {
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < maxDistance) {
+          const alpha = 1 - dist / maxDistance;
+          ctx.strokeStyle = `rgba(217,116,41,${alpha * 0.25})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    drawLines();
+    nodes.forEach(node => {
+      node.update();
+      node.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // Auto fade out canvas after 4 seconds, then remove from DOM
+  setTimeout(() => {
+    canvas.style.transition = 'opacity 1.5s ease';
+    canvas.style.opacity = '0';
+    setTimeout(() => canvas.remove(), 1600);
+  }, 4000);
+})();
 </script>
+
 </body>
 </html>
