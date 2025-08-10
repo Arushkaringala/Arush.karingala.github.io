@@ -1,145 +1,209 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Arush K — VLSI Engineer</title>
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  <style>
-    :root{
-      --bg:#0b0b0d;
-      --panel:#0f1113;
-      --accent:#00f0ff;
-      --accent2:#ff2eff;
-      --muted:#8b8b95;
-      --card-radius:14px;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;font-family:Inter, system-ui, sans-serif;background:var(--bg);color:#e6eef6;overflow-x:hidden}
-    #pcb-bg{position:fixed;inset:0;z-index:0}
-    .container{position:relative;z-index:2;max-width:1100px;margin:auto;padding:48px}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo .mark{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-family:'Share Tech Mono';font-weight:700}
-    .logo h1{margin:0;font-family:'Orbitron',sans-serif;font-size:20px}
-    nav a{color:var(--muted);text-decoration:none;margin:0 8px}
-    section{margin-bottom:60px}
-    .about{display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:center}
-    .about img{width:100%;border-radius:12px;box-shadow:0 0 20px rgba(0,240,255,0.3)}
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;color:#000;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:600;margin-right:10px}
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-    .project{background:var(--panel);padding:14px;border-radius:12px;transition:transform .28s;cursor:pointer}
-    .project:hover{transform:translateY(-6px);}
-    footer{padding:20px;background:var(--panel);border-radius:12px}
-    .experience-item{background:var(--panel);padding:14px;border-radius:12px;margin-bottom:14px}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arush K — VLSI Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0b0b0d;
+  --panel:#0f1113;
+  --muted:#8b8b95;
+  --card-radius:14px;
+  --accent1:#00f0ff;
+  --accent2:#0090ff;
+}
+body {
+  margin:0; background:var(--bg); color:#e6eef6;
+  font-family:Inter,system-ui,sans-serif; overflow-x:hidden;
+}
+#pcb-bg { position:fixed; inset:0; z-index:0 }
+.container { position:relative; z-index:2; max-width:1100px; margin:auto; padding:48px }
+header { display:flex; justify-content:space-between; align-items:center; margin-bottom:40px }
+.logo { display:flex; align-items:center; gap:12px }
+.logo .mark { width:48px; height:48px; border-radius:10px; background:linear-gradient(135deg,var(--accent1),var(--accent2)); display:grid; place-items:center; font-family:'Share Tech Mono'; font-weight:700 }
+.logo h1 { margin:0; font-family:'Orbitron',sans-serif; font-size:20px }
+nav a { color:var(--muted); text-decoration:none; margin:0 8px }
+.theme-toggle { position:absolute; top:20px; right:20px; cursor:pointer; background:var(--panel); padding:8px; border-radius:8px }
+.theme-menu { display:none; position:absolute; top:48px; right:0; background:var(--panel); border-radius:8px; overflow:hidden }
+.theme-menu button { display:block; width:160px; background:none; color:#fff; padding:8px; border:none; text-align:left; cursor:pointer }
+.theme-menu button:hover { background:rgba(255,255,255,0.08) }
+.about { display:grid; grid-template-columns:280px 1fr; gap:20px; align-items:center }
+.about img { width:100%; border-radius:12px; box-shadow:0 0 20px rgba(0,240,255,0.3) }
+.btn { display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none; color:#000; font-weight:600; margin-right:10px; background:linear-gradient(90deg,var(--accent1),var(--accent2)) }
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px }
+.project { background:var(--panel); padding:14px; border-radius:12px; transition:transform .28s; cursor:pointer }
+.project:hover { transform:translateY(-6px) }
+.experience-item { background:var(--panel); padding:14px; border-radius:12px; margin-bottom:14px; display:flex; align-items:center; gap:12px }
+.experience-item img { height:32px }
+footer { padding:20px; background:var(--panel); border-radius:12px }
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <canvas id="pcb-bg"></canvas>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <div class="mark">AK</div>
-        <div>
-          <h1>Arush Karingala</h1>
-          <div style="font-size:12px;color:var(--muted)">PDK Engineer · VLSI · Chip Design</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
-
-    <section id="about" class="about">
-      <img src="photo.jpg" alt="Arush Karingala">
-      <div>
-        <h2>About Me</h2>
-        <p>I am a PDK Engineer at Cadence Design Systems with a passion for VLSI and semiconductor technology. I hold an M.Tech in ECE from NIT Warangal and have industry experience from my internship at Intel, where I worked on platform simulation and verification for cutting-edge graphics products.</p>
-        <a href="resume.pdf" class="btn" download>Download Resume</a>
-        <a href="https://www.linkedin.com/in/arush-karingala" target="_blank" class="btn">LinkedIn</a>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE SECTION -->
-    <section id="experience">
-      <h2>Experience</h2>
-
-      <!-- Cadence -->
-      <!-- EXPERIENCE: Edit Cadence details below -->
-      <div class="experience-item">
-        <h3>Cadence Design Systems <span style="font-size:14px;color:var(--muted)">15 Jul 2024 – Present</span></h3>
-        <em>Role: PDK Engineer</em>
-        <ul>
-          <li>Work on various PDK collaterals from different foundries.</li>
-          <li>Perform QA testing and enablement for these deliverables.</li>
-          <li>Develop and maintain PV (Physical Verification) automation workflows.</li>
-        </ul>
-      </div>
-
-      <!-- Intel -->
-      <div class="experience-item">
-        <h3>Intel Corporation Pvt Ltd <span style="font-size:14px;color:var(--muted)">May 2023 – May 2024</span></h3>
-        <em>Role: Graduate Technical Intern</em>
-        <ul>
-          <li>Delivered behavioral and functional models for Intel’s Graphics products.</li>
-          <li>Led pre-silicon efforts to shift left post-silicon/power-on verification tests.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Projects & Publications</h2>
-      <div class="projects-grid">
-        <div class="project" onclick="window.open('https://ieeexplore.ieee.org/document/9917840','_blank')">
-          <h3>Segmentation Of Biological Cells</h3>
-          <p>IEEE publication on image processing techniques for cell segmentation.</p>
-        </div>
-        <div class="project">
-          <h3>Analysis of CMOS Inverter</h3>
-          <p>Used SkyWater SKY130 PDK & Ngspice to analyze VTC, MOS characteristics, and power simulations.</p>
-        </div>
-        <div class="project">
-          <h3>Vending Machine in Verilog</h3>
-          <p>Implemented a vending machine using Verilog HDL in Xilinx Vivado.</p>
-        </div>
-        <div class="project">
-          <h3>Fall Detector (IoT)</h3>
-          <p>Detects falls and sends alerts via Google Firebase to a mobile app.</p>
-        </div>
-        <div class="project">
-          <h3>Heart Attack Risk Prediction (ML)</h3>
-          <p>Built a logistic regression model to predict heart attack risk from health parameters.</p>
-        </div>
-      </div>
-    </section>
-
-    <footer id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:ka22ecm3r01@student.nitw.ac.in">ka22ecm3r01@student.nitw.ac.in</a></p>
-      <p>Phone: +91-7013065248</p>
-    </footer>
+<canvas id="pcb-bg"></canvas>
+<div class="container">
+<header>
+  <div class="logo">
+    <div class="mark">AK</div>
+    <div>
+      <h1>Arush Karingala</h1>
+      <div style="font-size:12px;color:var(--muted)">PDK Engineer · VLSI · Chip Design</div>
+    </div>
   </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="theme-toggle" id="themeToggle">
+    <!-- Simple chip icon -->
+    <svg width="24" height="24" fill="#fff"><rect x="4" y="4" width="16" height="16" rx="2" ry="2" stroke="#fff" fill="none"/><line x1="4" y1="9" x2="0" y2="9" stroke="#fff"/><line x1="24" y1="9" x2="20" y2="9" stroke="#fff"/><line x1="4" y1="15" x2="0" y2="15" stroke="#fff"/><line x1="24" y1="15" x2="20" y2="15" stroke="#fff"/></svg>
+    <div class="theme-menu" id="themeMenu">
+      <button data-theme="intel">Intel Blue Theme</button>
+      <button data-theme="tsmc">TSMC Multicolor Theme</button>
+    </div>
+  </div>
+</header>
 
-  <script>
-    const canvas = document.getElementById('pcb-bg');
-    const ctx = canvas.getContext('2d');
-    let w,h,nodes=[];
-    function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight;initNodes()}
-    window.addEventListener('resize',resize);
-    function initNodes(){nodes=[];const cols=Math.floor(w/160);const rows=Math.floor(h/140);
-      for(let x=0;x<cols;x++){for(let y=0;y<rows;y++){nodes.push({x:x*160+Math.random()*80,y:y*140+Math.random()*70,r:Math.random()*2+1,pulse:Math.random()*2+0.5})}}}
-    function draw(){ctx.clearRect(0,0,w,h);
-      ctx.lineWidth=1;ctx.strokeStyle='rgba(0,240,255,0.08)';
-      for(let i=0;i<nodes.length;i++){const a=nodes[i];for(let j=i+1;j<nodes.length;j++){const b=nodes[j];const dx=a.x-b.x;const dy=a.y-b.y;const d=Math.hypot(dx,dy);if(d<140){ctx.globalAlpha=1-(d/140);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
-      nodes.forEach(n=>{n.pulse+=0.02;const rr=(Math.sin(n.pulse)+1.5)*n.r;ctx.fillStyle='rgba(0,240,255,0.4)';ctx.beginPath();ctx.arc(n.x,n.y,rr,0,Math.PI*2);ctx.fill();});
-      requestAnimationFrame(draw);}
-    resize();draw();
-  </script>
+<section id="about" class="about">
+  <img src="photo.jpg" alt="Arush Karingala">
+  <div>
+    <h2>About Me</h2>
+    <p>I am a PDK Engineer at Cadence Design Systems with a passion for VLSI and semiconductor technology. I hold an M.Tech in ECE from NIT Warangal and have industry experience from my internship at Intel, where I worked on platform simulation and verification for cutting-edge graphics products.</p>
+    <a href="resume.pdf" class="btn" download>Download Resume</a>
+    <a href="https://www.linkedin.com/in/arush-karingala" target="_blank" class="btn">LinkedIn</a>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="experience-item">
+    <a href="https://www.cadence.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Cadence_Design_Systems_logo.svg" alt="Cadence"></a>
+    <div>
+      <h3>Cadence Design Systems <span style="font-size:14px;color:var(--muted)">15 Jul 2024 – Present</span></h3>
+      <em>Role: PDK Engineer</em>
+      <ul>
+        <li>Work on various PDK collaterals from different foundries.</li>
+        <li>Perform QA testing and enablement for these deliverables.</li>
+        <li>Develop and maintain PV (Physical Verification) automation workflows.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="experience-item">
+    <a href="https://www.intel.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Intel-logo.svg" alt="Intel"></a>
+    <div>
+      <h3>Intel Corporation Pvt Ltd <span style="font-size:14px;color:var(--muted)">May 2023 – May 2024</span></h3>
+      <em>Role: Graduate Technical Intern</em>
+      <ul>
+        <li>Delivered behavioral and functional models for Intel’s Graphics products.</li>
+        <li>Led pre-silicon efforts to shift left post-silicon/power-on verification tests.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects & Publications</h2>
+  <div class="projects-grid">
+    <div class="project" onclick="window.open('https://ieeexplore.ieee.org/document/9917840','_blank')">
+      <h3>Segmentation Of Biological Cells</h3>
+      <p>IEEE publication on image processing techniques for cell segmentation.</p>
+    </div>
+    <div class="project">
+      <h3>Analysis of CMOS Inverter</h3>
+      <p>Used SkyWater SKY130 PDK & Ngspice to analyze VTC, MOS characteristics, and power simulations.</p>
+    </div>
+    <div class="project">
+      <h3>Vending Machine in Verilog</h3>
+      <p>Implemented a vending machine using Verilog HDL in Xilinx Vivado.</p>
+    </div>
+    <div class="project">
+      <h3>Fall Detector (IoT)</h3>
+      <p>Detects falls and sends alerts via Google Firebase to a mobile app.</p>
+    </div>
+    <div class="project">
+      <h3>Heart Attack Risk Prediction (ML)</h3>
+      <p>Built a logistic regression model to predict heart attack risk from health parameters.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:ka22ecm3r01@student.nitw.ac.in">ka22ecm3r01@student.nitw.ac.in</a></p>
+  <p>Phone: +91-7013065248</p>
+</footer>
+</div>
+
+<script>
+// THEME SYSTEM
+const themeToggle=document.getElementById('themeToggle');
+const themeMenu=document.getElementById('themeMenu');
+themeToggle.addEventListener('click',()=>themeMenu.style.display=themeMenu.style.display==='block'?'none':'block');
+document.querySelectorAll('.theme-menu button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    setTheme(btn.dataset.theme);
+    localStorage.setItem('siteTheme',btn.dataset.theme);
+    themeMenu.style.display='none';
+  });
+});
+function setTheme(t){
+  if(t==='intel'){
+    document.documentElement.style.setProperty('--accent1','#00f0ff');
+    document.documentElement.style.setProperty('--accent2','#0090ff');
+  } else {
+    document.documentElement.style.setProperty('--accent1','#ff2e00');
+    document.documentElement.style.setProperty('--accent2','#ffd000');
+  }
+}
+setTheme(localStorage.getItem('siteTheme')||'intel');
+
+// FAB BACKGROUND
+const canvas=document.getElementById('pcb-bg');
+const ctx=canvas.getContext('2d');
+let w,h,tracks=[];
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight;initTracks()}
+window.addEventListener('resize',resize);
+function initTracks(){
+  tracks=[];
+  for(let i=0;i<50;i++){
+    tracks.push({
+      x:Math.random()*w,
+      y:Math.random()*h,
+      len:60+Math.random()*80,
+      dir:Math.random()<0.5?'h':'v',
+      speed:0.5+Math.random(),
+      colorTheme:Math.random()<0.5?'accent1':'accent2',
+      offset:Math.random()*100
+    });
+  }
+}
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle='rgba(255,255,255,0.05)';
+  for(let gx=0;gx<w;gx+=40){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,h);ctx.stroke();}
+  for(let gy=0;gy<h;gy+=40){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(w,gy);ctx.stroke();}
+  tracks.forEach(t=>{
+    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue(`--${t.colorTheme}`);
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    if(t.dir==='h'){ctx.moveTo(t.x,t.y);ctx.lineTo(t.x+t.len,t.y);}
+    else {ctx.moveTo(t.x,t.y);ctx.lineTo(t.x,t.y+t.len);}
+    ctx.stroke();
+    const dotPos=(Date.now()/10+t.offset)%t.len;
+    ctx.beginPath();
+    if(t.dir==='h'){ctx.arc(t.x+dotPos,t.y,3,0,Math.PI*2);}
+    else {ctx.arc(t.x,t.y+dotPos,3,0,Math.PI*2);}
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue(`--${t.colorTheme}`);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+resize();draw();
+</script>
 </body>
 </html>
+
