@@ -1,212 +1,301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Arush Karingala - VLSI Engineer</title>
-  <style>
-    :root {
-      --bg-color: #121212;
-      --text-color: #e7eef6;
-      --accent-1: #3a86ff;
-      --section-padding: 40px 20px;
-      --max-width: 900px;
-      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: var(--font-family);
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-    main {
-      max-width: var(--max-width);
-      margin: auto;
-      padding: var(--section-padding);
-    }
-    h1, h2, h3 {
-      color: var(--accent-1);
-      margin-bottom: 0.4em;
-    }
-    section {
-      margin-bottom: 60px;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    a {
-      color: var(--accent-1);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .project, .certification, .experience-item {
-      margin-bottom: 20px;
-    }
-    .flex-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .cert-list, .skill-list {
-      list-style: none;
-      padding-left: 0;
-    }
-    .cert-list li, .skill-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .cert-list img, .skill-list img {
-      width: 32px;
-      height: 32px;
-      object-fit: contain;
-    }
-    .view-link {
-      margin-left: auto;
-      font-weight: 600;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Arush K — VLSI Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0d;
+    --panel: rgba(15,17,19,0.9);
+    --muted:#9aa0a6;
+    --accent-1: #0071C5; /* Intel Blue */
+    --accent-2: #005A9C;
+    --btn-text: #ffffff;
+    --overlay-dark: rgba(6,8,10,0.55);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:#e7eef6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* Background */
+  .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden}
+  .bg-img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.05);width:auto;height:120%;transition:transform 6s ease-out;filter:blur(5px) saturate(1.05)}
+  .bg-overlay{position:absolute;inset:0;background:var(--overlay-dark)}
+  .bg-lines{position:absolute;inset:0;opacity:0.05;background-image:linear-gradient(transparent 15px,rgba(255,255,255,0.02) 16px),linear-gradient(90deg,transparent 15px,rgba(255,255,255,0.02) 16px);background-size:80px 80px}
+
+  .container{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:36px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}
+  .logo{display:flex;align-items:center;gap:12px}
+  .mark{width:48px;height:48px;border-radius:8px;background:var(--accent-1);display:grid;place-items:center;font-weight:700;color:white}
+  .logo h1{margin:0;font-size:20px}
+  .sub{font-size:12px;color:var(--muted)}
+
+  nav a{color:var(--muted);margin:0 8px;font-size:14px}
+  .theme-control{position:relative;z-index:9999}
+  .chip-btn{background:var(--panel);border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px;cursor:pointer}
+  .chip-menu{position:absolute;right:0;top:44px;background:var(--panel);border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.6);display:none;min-width:200px;z-index:99999}
+  .chip-menu .group{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .chip-menu button{width:100%;background:none;border:none;color:#e9f5ff;padding:8px;text-align:left;cursor:pointer;font-size:14px}
+  .chip-menu button:hover{background:rgba(255,255,255,0.05)}
+
+  .hero{display:grid;grid-template-columns:1fr 350px;gap:28px;align-items:start}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .card{background:var(--panel);padding:18px;border-radius:8px;backdrop-filter: blur(4px)}
+  .about{display:grid;grid-template-columns:240px 1fr;gap:20px;align-items:center}
+  @media(max-width:760px){.about{grid-template-columns:1fr}}
+  .about img{width:100%;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.6)}
+
+  .btn{display:inline-block;padding:8px 14px;border-radius:6px;text-decoration:none;color:var(--btn-text);font-weight:600;background:var(--accent-1);transition:background 0.3s}
+  .btn:hover{background:var(--accent-2)}
+
+  h2{margin:0 0 10px 0}
+  .experience-item{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;margin-bottom:12px}
+  .experience-item img{height:34px;width:auto}
+
+  footer{margin-top:26px;padding:18px;border-radius:8px;background:rgba(255,255,255,0.02)}
+  .muted{color:var(--muted);font-size:14px}
+
+  /* Certifications Section */
+  #certifications {
+    margin-top: 30px;
+  }
+  #certifications h2 {
+    margin-bottom: 12px;
+  }
+  .cert-card {
+    background: var(--panel);
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .cert-card a {
+    color: var(--accent-1);
+    text-decoration: underline;
+  }
+
+  /* Intro landing animation */
+  #introLanding {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 99999;
+    user-select: none;
+    pointer-events: all;
+  }
+  #introLogo {
+    width: 96px; height: 96px;
+    background: var(--accent-1);
+    border-radius: 12px;
+    color: white;
+    font-family: monospace, monospace;
+    font-weight: 700;
+    font-size: 3rem;
+    display: grid;
+    place-items: center;
+    animation: pulseIntro 2.5s ease-in-out infinite alternate;
+    box-shadow: 0 0 15px var(--accent-1);
+  }
+  @keyframes pulseIntro {
+    0% { box-shadow: 0 0 15px var(--accent-1); transform: scale(1); }
+    100% { box-shadow: 0 0 35px var(--accent-2); transform: scale(1.1); }
+  }
+</style>
 </head>
 <body>
-  <main>
-    <header>
-      <h1>Arush Karingala</h1>
-      <p>Passionate VLSI Engineer | PDK Engineer @ Cadence Design Systems</p>
-    </header>
 
-    <section id="projects">
-      <h2>Projects & Publications</h2>
+<!-- Intro Landing Screen -->
+<div id="introLanding">
+  <div id="introLogo">AK</div>
+</div>
 
-      <div class="project">
-        <h3>Analysis of VTC, MOS characteristics, noise analysis, power simulation of CMOS inverter</h3>
-        <p>Studied voltage transfer characteristics, MOS device behavior, noise effects, and power simulations for CMOS inverter circuits.</p>
+<div class="bg-wrap">
+  <img id="bgImage" class="bg-img" src="wafer.jpg" alt="fabrication background">
+  <div class="bg-overlay"></div>
+  <div class="bg-lines"></div>
+</div>
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="mark">AK</div>
+      <div>
+        <h1>Arush Karingala</h1>
+        <div class="sub">PDK Engineer · VLSI · Chip Design</div>
       </div>
-
-      <div class="project">
-        <h3>Vending Machine in Verilog</h3>
-        <p>Implemented a vending machine using Verilog HDL in Xilinx Vivado platform.</p>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="theme-control">
+      <div class="chip-btn" id="chipBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dff6ff" stroke-width="1.2">
+          <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+          <path d="M2 10h4M18 10h4M2 14h4M18 14h4M10 2v4M14 2v4M10 18v4M14 18v4" stroke-linecap="round"></path>
+        </svg>
+        Appearance
       </div>
-
-      <div class="project">
-        <h3>Fall Detector using IoT</h3>
-        <p>Designed a system to detect falls and send reports via Google Firebase to a mobile app developed with Kodular rapid mobile app development tool.</p>
+      <div class="chip-menu" id="chipMenu">
+        <div class="group">
+          <div class="muted">Theme</div>
+          <button data-act="theme" data-value="intel">Intel Blue</button>
+          <button data-act="theme" data-value="tsmc">TSMC Red</button>
+        </div>
+        <div class="group">
+          <div class="muted">Background</div>
+          <button data-act="bg" data-value="wafer">Silicon Wafer</button>
+          <button data-act="bg" data-value="die">Chip Die</button>
+        </div>
       </div>
+    </div>
+  </header>
 
-      <div class="project">
-        <h3>Machine Learning Techniques to Predict the Risk of Heart Attack</h3>
-        <p>Led a team at Advanced Academic Centre (AAC) to build a logistic regression ML model predicting heart attack risk using multiple health parameters.</p>
+  <section id="about" class="hero">
+    <div class="card about">
+      <img src="photo.jpg" alt="Arush Karingala">
+      <div>
+        <h2>About Me</h2>
+        <p>Passionate VLSI engineer with expertise in PDK development and chip design. Skilled in digital and analog design, verification, and automation with a strong foundation from NIT Warangal and experience at Intel.</p>
+        <a href="#contact" class="btn">Get In Touch</a>
       </div>
-    </section>
-
-    <section id="experience">
+    </div>
+    <div>
       <h2>Experience</h2>
-
-      <div class="experience-item">
-        <h3>PDK Engineer — Cadence Design Systems</h3>
-        <p><em>Aug 2024 – Present</em></p>
-        <p>Working on Process Design Kits (PDK) development and validation for advanced semiconductor technology nodes.</p>
+      <div id="experience">
+        <div class="experience-item">
+          <img src="cadence-logo.png" alt="Cadence">
+          <div>
+            <strong>PDK Engineer at Cadence Design Systems</strong><br>
+            <small>2024 - Present</small><br>
+            Worked on process design kits and automation for semiconductor manufacturing.
+          </div>
+        </div>
+        <div class="experience-item">
+          <img src="intel-logo.png" alt="Intel">
+          <div>
+            <strong>Intern at Intel</strong><br>
+            <small>2023 - 2024</small><br>
+            Supported chip design verification and automation tasks.
+          </div>
+        </div>
       </div>
-      <!-- Add more experience items here if needed -->
-    </section>
+    </div>
+  </section>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul class="skill-list">
-        <li>Verilog / SystemVerilog</li>
-        <li>VLSI Design & Verification</li>
-        <li>Python Programming</li>
-        <li>Machine Learning Basics</li>
-        <li>IoT Development</li>
-        <li>Cadence Tools (Virtuoso, Innovus)</li>
-      </ul>
-    </section>
+  <section id="projects" class="card" style="margin-top: 30px;">
+    <h2>Projects & Publications</h2>
+    <ul>
+      <li><strong>Automated PDK Validation</strong> – Developed tools to automate process design kit validation workflows.</li>
+      <li><strong>Low-Power Digital IP</strong> – Designed and verified digital IP blocks focused on power efficiency.</li>
+      <li><strong>VLSI Design Automation</strong> – Created scripts and automation flows for chip design and verification.</li>
+    </ul>
+  </section>
 
-    <section id="certifications">
-      <h2>Certifications</h2>
-      <ul class="cert-list">
-        <li>
-          <img src="cadence.png" alt="Cadence logo" />
-          SKILL Language Programming Introduction vIC23.1 Exam
-          <a href="https://www.credly.com/badges/71edc995-c045-46f4-9fa5-778470c2e7d8/linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
+  <section id="certifications" class="card">
+    <h2>Certifications</h2>
+    <div class="cert-card">
+      <strong>Cadence Certified Innovator</strong> — Issued by Cadence, 2024
+    </div>
+    <div class="cert-card">
+      <strong>VLSI Design Specialization</strong> — Coursera, 2023 <a href="https://coursera.org/verify/yourcertificate" target="_blank" rel="noopener">Verify</a>
+    </div>
+  </section>
 
-        <li>
-          <img src="arm.png" alt="Arm logo" />
-          Arm India VLSI to System Design: Silicon to End Application Approach - Participation Certificate
-          <a href="https://www.credential.net/0ebb0c6d-97a4-438f-abdc-9acec4842a50" target="_blank" class="view-link">View Credential</a>
-        </li>
+  <footer>
+    <div class="muted">© 2025 Arush Karingala. Built with passion for VLSI.</div>
+  </footer>
+</div>
 
-        <li>
-          <img src="coursera.png" alt="Coursera logo" />
-          Hardware Description Languages for FPGA Design (Verilog)
-          <a href="https://coursera.org/share/940b673e65cd27c830bd02e75e99a9d4" target="_blank" class="view-link">View Credential</a>
-        </li>
+<script>
+  // Theme and background toggling logic from previous snippet
+  const themes = {
+    intel: {
+      '--accent-1': '#0071C5',
+      '--accent-2': '#005A9C',
+      '--bg': '#0b0b0d',
+      '--panel': 'rgba(15,17,19,0.9)',
+      '--muted': '#9aa0a6',
+      '--btn-text': '#ffffff',
+      '--overlay-dark': 'rgba(6,8,10,0.55)'
+    },
+    tsmc: {
+      '--accent-1': '#C71F2D',
+      '--accent-2': '#9B1722',
+      '--bg': '#1a0a0a',
+      '--panel': 'rgba(25,8,8,0.9)',
+      '--muted': '#b89a9a',
+      '--btn-text': '#f9d4d4',
+      '--overlay-dark': 'rgba(25,8,8,0.55)'
+    }
+  };
 
-        <li>
-          <img src="cisco.png" alt="Cisco logo" />
-          CyberOps Associate
-          <a href="https://www.credly.com/badges/d618d45f-5d34-4f1d-8e86-180ca02db38c/linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
+  const backgrounds = {
+    wafer: 'wafer.jpg',
+    die: 'die.jpg'
+  };
 
-        <li>
-          <img src="cisco.png" alt="Cisco logo" />
-          Introduction to Cybersecurity
-          <a href="https://www.credly.com/badges/83874c5d-6372-4558-8c84-cd0415648705?source=linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
+  const chipBtn = document.getElementById('chipBtn');
+  const chipMenu = document.getElementById('chipMenu');
+  const bgImage = document.getElementById('bgImage');
 
-        <li>
-          <img src="cisco.png" alt="Cisco logo" />
-          Introduction to Packet Tracer
-          <a href="https://www.credly.com/badges/405f807a-33ec-473a-89a9-2c9293af4ebc/linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
+  chipBtn.addEventListener('click', () => {
+    chipMenu.style.display = chipMenu.style.display === 'block' ? 'none' : 'block';
+  });
 
-        <li>
-          <img src="aws.png" alt="AWS logo" />
-          AWS Academy Graduate - AWS Academy Cloud Foundations
-          <a href="https://www.youracclaim.com/badges/5ecf1ce0-5707-49f1-bb88-35e504b4e0fb?source=linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
+  chipMenu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      const act = e.target.getAttribute('data-act');
+      const value = e.target.getAttribute('data-value');
 
-        <li>
-          <img src="coursera.png" alt="Coursera logo" />
-          Object Oriented Programming in Java
-          <a href="https://coursera.org/share/b3e572fe13b7664f36fdd3c225a4f968" target="_blank" class="view-link">View Credential</a>
-        </li>
+      if (act === 'theme' && themes[value]) {
+        Object.entries(themes[value]).forEach(([k,v]) => {
+          document.documentElement.style.setProperty(k, v);
+        });
+        localStorage.setItem('theme', value);
+      }
+      if (act === 'bg' && backgrounds[value]) {
+        bgImage.src = backgrounds[value];
+        localStorage.setItem('bg', value);
+      }
+      chipMenu.style.display = 'none';
+    }
+  });
 
-        <li>
-          <img src="youracclaim.png" alt="Your Acclaim logo" />
-          CCNA: Enterprise Networking, Security, and Automation
-          <a href="https://www.youracclaim.com/badges/1c0a5762-80e6-4b6e-ad2d-59b3dee7a05f?source=linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
+  // Load saved preferences
+  window.addEventListener('load', () => {
+    const savedTheme = localStorage.getItem('theme');
+    const savedBg = localStorage.getItem('bg');
+    if (savedTheme && themes[savedTheme]) {
+      Object.entries(themes[savedTheme]).forEach(([k,v]) => {
+        document.documentElement.style.setProperty(k, v);
+      });
+    }
+    if (savedBg && backgrounds[savedBg]) {
+      bgImage.src = backgrounds[savedBg];
+    }
+  });
 
-        <li>
-          <img src="coursera.png" alt="Coursera logo" />
-          Machine Learning
-          <a href="https://www.coursera.org/account/accomplishments/certificate/AX4N2TCNNKPN" target="_blank" class="view-link">View Credential</a>
-        </li>
+  // Hide intro landing with animation and enable scrolling afterward
+  document.body.style.overflow = 'hidden';
+  window.addEventListener('load', () => {
+    const intro = document.getElementById('introLanding');
+    setTimeout(() => {
+      intro.style.transition = 'opacity 1s ease';
+      intro.style.opacity = 0;
+      setTimeout(() => {
+        intro.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 1000);
+    }, 2500);
+  });
+</script>
 
-        <li>
-          <img src="youracclaim.png" alt="Your Acclaim logo" />
-          CCNA: Introduction to Networks
-          <a href="https://www.youracclaim.com/badges/9c3bfa59-3dc8-4d09-9302-4009fb7544dc/linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
-
-        <li>
-          <img src="youracclaim.png" alt="Your Acclaim logo" />
-          CCNA: Switching, Routing, and Wireless Essentials
-          <a href="https://www.youracclaim.com/badges/ba40e9a4-ec91-40fb-bd99-e4dea05313e2/linked_in_profile" target="_blank" class="view-link">View Credential</a>
-        </li>
-      </ul>
-    </section>
-
-    <section id="resume">
-      <h2>Resume</h2>
-      <p>You can download my resume here: <a href="https://arushkaringala.github.io/resume.pdf" target="_blank" rel="noopener noreferrer">Resume PDF</a></p>
-    </section>
-  </main>
 </body>
 </html>
