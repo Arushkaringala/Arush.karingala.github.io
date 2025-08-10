@@ -3,156 +3,138 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Arush Karingala — PDK/CAD engineer</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Arush Karingala — VLSI Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <meta name="description" content="Portfolio of Arush Karingala — VLSI Engineer & PDK Specialist. PDK, SKY130, Verilog, IoT, ML projects.">
 
 <style>
+/* ---- Typography ---- */
+:root{ --font:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+html{font-family:var(--font);}
+
+/* ---- Theme variables ---- */
 :root{
-  --light-bg: #f6f8fb;
-  --light-surface: rgba(255,255,255,0.92);
-  --light-text: #052033;
-  --light-muted:#566b80;
-  --light-accent: #0b76b8;
-
-  --dark-bg: #071127;
-  --dark-surface: rgba(10,18,30,0.9);
-  --dark-text: #eaf4ff;
-  --dark-muted:#9fb0d0;
-  --dark-accent:#00a8ff;
-
-  --radius:14px;
-  --glass: rgba(255,255,255,0.06);
+  --accent-light:#0b76b8;
+  --accent-dark:#00a8ff;
 }
-html,body{height:100%}
-body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial;transition:background .35s ease,color .35s ease}
+html.light{ --bg:#f6f8fb; --surface:rgba(255,255,255,0.98); --text:#072033; --muted:#5b6b78; --accent:var(--accent-light); --card-shadow:0 12px 40px rgba(9,30,46,0.06); }
+html.dark { --bg:#071127; --surface:rgba(8,12,20,0.92); --text:#eaf4ff; --muted:#9fb0d0; --accent:var(--accent-dark); --card-shadow:0 18px 60px rgba(0,0,0,0.6); }
 
-/* theme vars (light default) */
-body.light{background:var(--light-bg);color:var(--light-text)}
-body.light{--surface:var(--light-surface);--muted:var(--light-muted);--accent:var(--light-accent);--text:var(--light-text);--bgTone:rgba(6,24,38,0.03)}
-body.dark{background:var(--dark-bg);color:var(--dark-text)}
-body.dark{--surface:var(--dark-surface);--muted:var(--dark-muted);--accent:var(--dark-accent);--text:var(--dark-text);--bgTone:rgba(0,120,200,0.035)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
 
-a{color:var(--accent)}
-a:hover{text-decoration:underline}
+.container{max-width:1100px;margin:0 auto;padding:32px;position:relative;z-index:2}
 
-/* Responsive container */
-.container{position:relative; z-index:2; max-width:1100px; margin:0 auto; padding:32px}
+/* Header */
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+.logo{display:flex;gap:12px;align-items:center}
+.mark{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:white;background:linear-gradient(180deg,var(--accent), color-mix(in srgb, var(--accent) 70%, black 10%));box-shadow:0 8px 30px rgba(11,118,184,0.12);font-size:20px}
+.logo h1{margin:0;font-size:18px}
+.sub{font-size:12px;color:var(--muted)}
 
-header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px}
-.logo{display:flex; gap:12px; align-items:center}
-.mark{width:56px; height:56px; border-radius:12px; display:grid; place-items:center; font-weight:800; color:white; background:linear-gradient(180deg,var(--accent), color-mix(in srgb, var(--accent) 70%, black 10%)); box-shadow:0 8px 30px rgba(11,118,184,0.12); font-size:20px}
-.logo h1{margin:0; font-size:18px}
-.sub{font-size:12px; color:var(--muted)}
+nav{display:flex;gap:12px;align-items:center}
+nav a{color:var(--muted);font-size:13px;font-weight:600;text-transform:uppercase;padding:8px 10px;border-radius:8px;transition:all .28s; text-decoration:none}
+nav a:hover{color:var(--accent);transform:translateY(-3px)}
 
-nav{display:flex; gap:10px; align-items:center}
-nav a{color:var(--muted); font-size:13px; font-weight:700; text-transform:uppercase; padding:8px 10px; border-radius:8px}
-nav a:hover{background:var(--bgTone)}
+.header-controls{display:flex;gap:10px;align-items:center}
+.theme-toggle{background:var(--surface);border-radius:10px;padding:8px;display:flex;align-items:center;gap:8px;border:1px solid rgba(0,0,0,0.06);cursor:pointer}
+.theme-toggle svg{width:18px;height:18px}
 
-/* floating top-right controls */
-.controls{position:fixed; top:18px; right:18px; z-index:30; display:flex; gap:10px; align-items:center}
-.icon-btn{display:inline-grid; place-items:center; width:44px; height:44px; border-radius:10px; background:var(--surface); border:1px solid rgba(0,0,0,0.04); box-shadow:0 6px 20px rgba(2,6,23,0.06); cursor:pointer}
-.icon-btn img{width:22px;height:22px}
-.toggle-text{font-size:13px; padding:8px 12px; border-radius:10px; background:transparent; border:1px solid rgba(0,0,0,0.06); cursor:pointer}
+/* Background layers */
+.bg-wrap{position:fixed;inset:0;z-index:0;pointer-events:none}
+.bg-wafer{position:absolute;inset:-12% -6% -12% -6%;transform-origin:center;opacity:0.06;filter:blur(.6px) saturate(.9);animation:waferRotate 36s linear infinite}
+@keyframes waferRotate{from{transform:rotate(0deg) scale(1)}to{transform:rotate(6deg) scale(1.02)}}
+.bg-grid{position:absolute;inset:0;opacity:0.06}
+.bg-pulse{position:absolute;inset:0;opacity:0.06;mix-blend-mode:screen;animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{0%{opacity:0.03}50%{opacity:0.11}100%{opacity:0.03}}
 
-/* hero */
-.hero{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:center; min-height:380px}
-@media(max-width:880px){.hero{grid-template-columns:1fr; text-align:center} .hero-photo{order:-1}}
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;min-height:380px}
+@media(max-width:880px){.hero{grid-template-columns:1fr;text-align:center}.hero-photo{order:-1}}
 .h-title{font-size:32px;margin:0;color:var(--accent);font-weight:700}
 .h-sub{color:var(--muted);margin:10px 0 20px 0;max-width:640px}
-.btns{display:flex; gap:12px; flex-wrap:wrap}
-.btn{padding:10px 18px; border-radius:10px; background:linear-gradient(180deg,var(--accent), color-mix(in srgb, var(--accent) 60%, black 10%)); color:white; font-weight:700; text-decoration:none; box-shadow:0 12px 36px rgba(11,118,184,0.16)}
-.btn.ghost{background:transparent; color:var(--muted); border:1px solid rgba(0,0,0,0.04)}
-.hero-photo img{width:100%; border-radius:12px; box-shadow:0 18px 48px rgba(2,6,23,0.12)}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:10px 18px;border-radius:10px;background:linear-gradient(180deg,var(--accent), color-mix(in srgb, var(--accent) 60%, black 10%));color:white;font-weight:700;text-decoration:none;box-shadow:var(--card-shadow)}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(0,0,0,0.04)}
+.hero-photo img{width:100%;border-radius:12px;box-shadow:0 18px 48px rgba(2,6,23,0.12)}
 
-/* cards */
-.card{background:var(--surface); border-radius:var(--radius); padding:18px; box-shadow:0 10px 36px rgba(2,8,20,0.06); border:1px solid rgba(0,0,0,0.04); margin-bottom:18px; transition:transform .25s ease, box-shadow .25s ease}
-.card:hover{transform:translateY(-6px); box-shadow:0 24px 60px rgba(2,8,20,0.08)}
-.section-title{display:flex; align-items:center; gap:12px; margin:0 0 12px 0}
+/* Cards */
+.card{background:var(--surface);border-radius:14px;padding:18px;box-shadow:var(--card-shadow);border:1px solid rgba(0,0,0,0.04);margin-bottom:18px;transition:transform .28s ease,box-shadow .28s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(2,8,20,0.08)}
+.section-title{display:flex;align-items:center;gap:12px;margin:0 0 12px 0}
 .title-bar{width:44px;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--accent), color-mix(in srgb, var(--accent) 60%, white 10%))}
 .section-title h2{margin:0;color:var(--accent)}
 
-/* experience */
-.exp-item{display:flex; gap:16px; align-items:flex-start; padding:12px; border-radius:10px; background:linear-gradient(180deg, transparent, rgba(0,0,0,0.01))}
-.exp-item img{height:44px}
+/* Experience & Projects */
+.exp-item{display:flex;gap:16px;align-items:flex-start;padding:12px;border-radius:10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.01))}
+.exp-item img{height:44px;transition:transform .28s ease}
+.exp-item img:hover{transform:scale(1.06)}
 .exp-item h3{margin:0;color:var(--accent)}
 .exp-item span{font-size:13px;color:var(--muted)}
 
-/* projects grid */
-.projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(max-width:880px){.projects-grid{grid-template-columns:1fr}}
-.project-card{padding:14px; border-radius:10px; background:linear-gradient(180deg, transparent, rgba(0,0,0,0.01)); cursor:pointer; border:1px solid rgba(0,0,0,0.04)}
-.project-card:hover{transform:translateY(-6px); box-shadow:0 20px 44px rgba(2,8,20,0.06)}
+.project-card{padding:14px;border-radius:12px;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.01));cursor:pointer;border:1px solid rgba(0,0,0,0.04);transition:transform .22s ease,box-shadow .22s ease}
+.project-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(2,8,20,0.06)}
 .project-card strong{color:var(--accent)}
 
-/* modal */
-.modal-backdrop{position:fixed; inset:0; z-index:60; display:flex; align-items:flex-end; justify-content:center; background:linear-gradient(180deg, rgba(2,6,12,0.4), rgba(2,6,12,0.6))}
-.modal{width:100%; max-width:900px; background:var(--surface); border-radius:18px 18px 10px 10px; padding:22px; margin:24px; transform:translateY(40px); transition:transform .36s cubic-bezier(.2,.9,.2,1), opacity .28s; box-shadow:0 40px 120px rgba(2,6,23,0.35)}
-.modal.show{transform:translateY(0);}
+/* modal (iOS-like) */
+.modal-backdrop{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;background:linear-gradient(180deg, rgba(2,6,12,0.45), rgba(2,6,12,0.6));z-index:60}
+.modal{width:100%;max-width:880px;background:var(--surface);border-radius:18px 18px 10px 10px;padding:22px;margin:20px;transform:translateY(40px) scale(.995);opacity:0;transition:transform .42s cubic-bezier(.2,.9,.2,1),opacity .32s}
+.modal.show{transform:translateY(0) scale(1);opacity:1}
 .modal .close{float:right;background:transparent;border:none;color:var(--muted);font-weight:700;cursor:pointer}
 
 /* footer */
 footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
 
-/* background SVG layers (wafer + grid) - placed behind content */
-.bg-wrap{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
-.bg-wafer{position:absolute; inset:-10% -10% -10% -10%; transform-origin:center; opacity:0.06; filter:blur(0.6px) saturate(.9)}
-.bg-grid-svg{position:absolute; inset:0; opacity:0.06}
-.bg-pulse{position:absolute; inset:0; opacity:0.06; mix-blend-mode:screen}
+/* prints */
+@media print{.theme-toggle,.bg-wrap,.modal-backdrop{display:none}body{background:white;color:black}.card{box-shadow:none;border:0}}
 
-/* subtle animations */
-@keyframes waferRotate{from{transform:rotate(0deg) scale(1)}to{transform:rotate(6deg) scale(1.02)}}
-.wafer-anim{animation:waferRotate 40s linear infinite}
-@keyframes pulse{0%{opacity:0.04}50%{opacity:0.12}100%{opacity:0.04}}
-.pulse-anim{animation:pulse 6s ease-in-out infinite}
-
-/* print-friendly */
-@media print{.controls,.modal-backdrop,.bg-wrap{display:none} body{background:white;color:black} .card{box-shadow:none;border:0}}
-
-/* small screens */
-@media(max-width:520px){.mark{width:48px;height:48px}.hero{gap:16px}.h-title{font-size:24px}}
+/* motion preference */
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
-<body class="light">
+<body>
 
-<!-- Background layers -->
+<!-- background layers -->
 <div class="bg-wrap" aria-hidden="true">
-  <!-- wafer image (subtle rotated layer) - will animate slowly -->
-  <img class="bg-wafer wafer-anim" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1600'><defs><radialGradient id='g' cx='50%' cy='40%'><stop offset='0' stop-color='%23ffffff' stop-opacity='0.06'/><stop offset='1' stop-color='%2300192b' stop-opacity='0.02'/></radialGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/></svg>" alt="" />
-
-  <!-- scalable SVG grid representing chip traces -->
-  <svg class="bg-grid-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <svg class="bg-wafer" viewBox="0 0 1600 1600" preserveAspectRatio="xMidYMid slice" style="width:140%;height:140%;">
     <defs>
-      <linearGradient id="g1" x1="0" x2="1">
-        <stop offset="0" stop-color="#00a8ff" stop-opacity="0.15"/>
-        <stop offset="1" stop-color="#00d4ff" stop-opacity="0.06"/>
-      </linearGradient>
+      <radialGradient id="wg" cx="50%" cy="35%"><stop offset="0" stop-color="#ffffff" stop-opacity="0.06"/><stop offset="1" stop-color="#001827" stop-opacity="0.02"/></radialGradient>
     </defs>
+    <rect width="100%" height="100%" fill="url(#wg)"/>
+  </svg>
+
+  <svg class="bg-grid" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
     <g stroke="currentColor" stroke-opacity="0.06" stroke-width="1">
-      <!-- vertical grid -->
-      <g stroke-opacity="0.035">
-        <line x1="0" y1="0" x2="0" y2="900" />
-        <!-- many lines generated visually by repetition -->
-        ${Array.from({length:19}).map((_,i)=>`<line x1="${80*(i+1)}" y1="0" x2="${80*(i+1)}" y2="900" />`).join('')}
-      </g>
+      <line x1="80" y1="0" x2="80" y2="900" />
+      <line x1="160" y1="0" x2="160" y2="900" />
+      <line x1="240" y1="0" x2="240" y2="900" />
+      <line x1="320" y1="0" x2="320" y2="900" />
+      <line x1="400" y1="0" x2="400" y2="900" />
+      <line x1="480" y1="0" x2="480" y2="900" />
+      <line x1="560" y1="0" x2="560" y2="900" />
+      <line x1="640" y1="0" x2="640" y2="900" />
+      <line x1="720" y1="0" x2="720" y2="900" />
+      <line x1="800" y1="0" x2="800" y2="900" />
+      <line x1="880" y1="0" x2="880" y2="900" />
+      <line x1="960" y1="0" x2="960" y2="900" />
+      <line x1="1040" y1="0" x2="1040" y2="900" />
+      <line x1="1120" y1="0" x2="1120" y2="900" />
+      <line x1="1200" y1="0" x2="1200" y2="900" />
+      <line x1="1280" y1="0" x2="1280" y2="900" />
+      <line x1="1360" y1="0" x2="1360" y2="900" />
+      <line x1="1440" y1="0" x2="1440" y2="900" />
     </g>
-    <g class="bg-pulse pulse-anim">
-      <path d="M40 700 C200 640, 360 720, 520 700 C680 680, 840 760, 1000 730" stroke="#00a8ff" stroke-opacity="0.06" stroke-width="2" fill="none"/>
-    </g>
+  </svg>
+
+  <svg class="bg-pulse" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40 700 C200 640, 360 720, 520 700 C680 680, 840 760, 1000 730" stroke="currentColor" stroke-opacity="0.06" stroke-width="2" fill="none"/>
   </svg>
 </div>
 
-<!-- controls -->
-<div class="controls">
-  <div class="icon-btn" title="Toggle theme" id="themeBtn" role="button" aria-pressed="false">
-    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23007ab8' d='M12 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zM5.2 5.64a1 1 0 0 1 1.4 0l.7.7a1 1 0 0 1-1.4 1.42l-.7-.7a1 1 0 0 1 0-1.42zM3 13a1 1 0 0 1 1-1h1a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM18.8 5.64a1 1 0 0 1 0 1.42l-.7.7A1 1 0 0 1 16.7 6.4l.7-.7a1 1 0 0 1 1.4 0zM20 13a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1z' /></svg>" alt="theme"/>
-  </div>
-  <button class="toggle-text" id="printBtn" title="Print / Export PDF">Export PDF</button>
-</div>
-
-<div class="container" role="main">
+<div class="container">
   <header>
     <div class="logo" aria-label="Website logo">
       <div class="mark">A</div>
@@ -162,15 +144,24 @@ footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
       </div>
     </div>
 
-    <nav aria-label="Primary navigation">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <nav aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-controls">
+        <div class="theme-toggle" id="themeToggle" role="button" aria-label="Toggle theme" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z" fill="#0b76b8"/></svg>
+        </div>
+      </div>
+    </div>
   </header>
 
+  <!-- hero -->
   <section class="hero">
     <div>
       <h2 class="h-title">Hello, I'm Arush Karingala</h2>
@@ -186,11 +177,13 @@ footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
     <div class="hero-photo"><img src="photo.jpg" alt="Photo of Arush Karingala" loading="lazy"/></div>
   </section>
 
+  <!-- about -->
   <section id="about" class="card" aria-labelledby="aboutHeading">
     <div class="section-title"><div class="title-bar" aria-hidden="true"></div><h2 id="aboutHeading">About Me</h2></div>
     <p>I hold an M.Tech in Electronics and Communication Engineering from NIT Warangal and have worked as a PDK Engineer at Cadence and interned at Intel. My expertise is in VLSI design, Process Design Kits (PDKs), SPICE flow automation, and semiconductor process integration.</p>
   </section>
 
+  <!-- experience -->
   <section id="experience" class="card" aria-labelledby="experienceHeading">
     <div class="section-title"><div class="title-bar" aria-hidden="true"></div><h2 id="experienceHeading">Experience</h2></div>
 
@@ -220,6 +213,7 @@ footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
     </div>
   </section>
 
+  <!-- projects -->
   <section id="projects" class="card" aria-labelledby="projectsHeading">
     <div class="section-title"><div class="title-bar" aria-hidden="true"></div><h2 id="projectsHeading">Projects</h2></div>
 
@@ -246,12 +240,14 @@ footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
     </div>
   </section>
 
+  <!-- certifications -->
   <section id="certifications" class="card" aria-labelledby="certificationsHeading">
     <div class="section-title"><div class="title-bar" aria-hidden="true"></div><h2 id="certificationsHeading">Certifications</h2></div>
     <div class="cert-item"><a href="https://www.coursera.org/account/accomplishments/verify/ABC123" target="_blank" rel="noopener">VLSI Design Specialization - Coursera</a><br/>Issued: March 2024</div>
     <div class="cert-item"><a href="https://www.edx.org/certificates/XYZ456" target="_blank" rel="noopener">Advanced Digital Circuits - edX</a><br/>Issued: December 2023</div>
   </section>
 
+  <!-- contact -->
   <section id="contact" class="card" aria-labelledby="contactHeading">
     <div class="section-title"><div class="title-bar" aria-hidden="true"></div><h2 id="contactHeading">Contact Me</h2></div>
     <p>Email: <a href="mailto:ka22ecm3r01@student.nitw.ac.in">ka22ecm3r01@student.nitw.ac.in</a></p>
@@ -261,7 +257,7 @@ footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
   <footer>&copy; <span id="year"></span> Arush Karingala · Built with care for silicon & code.</footer>
 </div>
 
-<!-- Modal template -->
+<!-- modal template -->
 <template id="modalTpl">
   <div class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal" role="document">
@@ -278,64 +274,55 @@ footer{padding:16px;text-align:center;color:var(--muted);font-size:13px}
 // set year
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// theme toggle (light default) and persist
+// Theme handling (light default) — toggle html class directly and persist
 (function(){
-  const btn = document.getElementById('themeBtn');
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
   const saved = localStorage.getItem('theme');
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
   // default to light if nothing saved
   const start = saved || (prefersDark ? 'dark' : 'light');
-  document.body.classList.remove('dark','light');
-  document.body.classList.add(start);
+  html.classList.remove('light','dark');
+  html.classList.add(start);
   if(btn) btn.setAttribute('aria-pressed', start==='dark');
 
-  btn.addEventListener('click', ()=>{
-    const next = document.body.classList.contains('dark') ? 'light' : 'dark';
-    document.body.classList.remove('dark','light');
-    document.body.classList.add(next);
-    localStorage.setItem('theme', next);
-    btn.setAttribute('aria-pressed', next==='dark');
-  });
+  // ensure icon reflects state
+  function renderIcon(state){
+    if(!btn) return;
+    if(state==='dark'){
+      btn.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M21 12.79A9 9 0 0111.21 3 7 7 0 1021 12.79z"/></svg>';
+    } else {
+      btn.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.79 1.8-1.79zM1 13h3v-2H1v2zm10 9h2v-3h-2v3zm9-9h3v-2h-3v2zM17.24 4.84l1.79-1.79 1.79 1.79-1.79 1.79-1.79-1.79zM12 6a6 6 0 100 12 6 6 0 000-12z"/></svg>';
+    }
+  }
+  renderIcon(start);
+
+  if(btn){
+    btn.addEventListener('click', ()=>{
+      const next = html.classList.contains('dark') ? 'light' : 'dark';
+      html.classList.remove('light','dark');
+      html.classList.add(next);
+      localStorage.setItem('theme', next);
+      btn.setAttribute('aria-pressed', next==='dark');
+      renderIcon(next);
+    });
+    btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); btn.click(); } });
+  }
 })();
 
-// Export PDF button
-document.getElementById('printBtn').addEventListener('click', ()=> window.print());
-
-// Section reveal on scroll
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){ e.target.classList.add('reveal'); observer.unobserve(e.target); }
-  });
-},{threshold:0.12});
+// section reveal on scroll
+const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity=1; e.target.style.transform='translateY(0)'; observer.unobserve(e.target);} }); },{threshold:0.12});
 document.querySelectorAll('.card, .hero').forEach(el=>{ el.style.opacity=0; el.style.transform='translateY(8px)'; observer.observe(el); });
-// simple reveal style
-const style = document.createElement('style'); style.innerHTML = '.reveal{opacity:1!important;transform:translateY(0)!important;transition:all .6s cubic-bezier(.2,.9,.2,1)!important}'; document.head.appendChild(style);
 
-// Projects content (exact text preserved)
+// projects modal
 const projects = { p1:{title:'Analysis of CMOS Inverter Characteristics using SkyWater SKY130 PDK and Ngspice SPICE simulator', body:'Analysis of VTC, MOS characteristics, noise analysis, power simulation of CMOS inverter.'}, p2:{title:'Vending machine in Verilog', body:'Implemented Vending machine using Verilog HDL in Xilinx Vivado.'}, p3:{title:'Fall detector using IoT', body:"Detects a fall and reports it via Google Firebase to a mobile app developed using Kodular rapid mobile app development utility."}, p4:{title:'Machine Learning Techniques to Predict the risk of Heart Attack', body:'Served as a team leader at Advanced Academic Centre (AAC) to build an ML model using logistic regression statistical model to predict the risk of a heart attack by taking various attributes like resting blood sugar, maximum heart rate and many more.'} };
 
-function openModal(key){
-  const tpl = document.getElementById('modalTpl');
-  const clone = tpl.content.cloneNode(true);
-  const backdrop = clone.querySelector('.modal-backdrop');
-  const modal = clone.querySelector('.modal');
-  const h3 = clone.querySelector('h3');
-  const body = clone.querySelector('.modal-body');
-  const btn = clone.querySelector('.close');
-  h3.textContent = projects[key].title; body.textContent = projects[key].body;
-  document.body.appendChild(backdrop);
-  requestAnimationFrame(()=> modal.classList.add('show'));
-  btn.focus();
-  function close(){ backdrop.remove(); }
-  btn.addEventListener('click', close);
-  backdrop.addEventListener('click', e=>{ if(e.target===backdrop) close(); });
-  document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown', esc); } });
-}
+function openModal(key){ const tpl=document.getElementById('modalTpl'); const clone=tpl.content.cloneNode(true); const backdrop=clone.querySelector('.modal-backdrop'); const modal=clone.querySelector('.modal'); const h3=clone.querySelector('h3'); const body=clone.querySelector('.modal-body'); const btn=clone.querySelector('.close'); h3.textContent=projects[key].title; body.textContent=projects[key].body; document.body.appendChild(backdrop); requestAnimationFrame(()=> modal.classList.add('show')); btn.focus(); function close(){ backdrop.remove(); } btn.addEventListener('click', close); backdrop.addEventListener('click', e=>{ if(e.target===backdrop) close(); }); document.addEventListener('keydown', function esc(e){ if(e.key==='Escape'){ close(); document.removeEventListener('keydown', esc); } }); }
 document.querySelectorAll('.project-card').forEach(c=>{ c.addEventListener('click', ()=> openModal(c.dataset.project)); c.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openModal(c.dataset.project);} }); });
 
-// make wafer rotate slowly via CSS variable
-document.querySelectorAll('.wafer-anim').forEach(el=>{ el.style.animationDuration = '40s'; });
-
+// set year
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
