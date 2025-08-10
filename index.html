@@ -16,47 +16,302 @@
     --overlay-dark: rgba(6,8,10,0.55);
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:#e7eef6;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:#e7eef6;
+    overflow-x:hidden;
+    opacity:0;
+    transform: translateY(20px);
+    animation: fadeSlideIn 1s ease forwards;
+  }
+  @keyframes fadeSlideIn {
+    to {
+      opacity:1;
+      transform: translateY(0);
+    }
+  }
+  a{
+    color:inherit;
+    text-decoration:none;
+    transition: color 0.3s ease;
+  }
+  a:hover{
+    color: var(--accent-1);
+  }
+  img{
+    max-width:100%;
+    display:block;
+  }
+  .bg-wrap{
+    position:fixed;inset:0;z-index:0;overflow:hidden;
+  }
+  .bg-img{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.05);
+    width:auto;height:120%;
+    transition:transform 6s ease-out;
+    filter:blur(5px) saturate(1.05);
+  }
+  .bg-overlay{
+    position:absolute;inset:0;background:var(--overlay-dark);
+  }
+  .bg-lines{
+    position:absolute;inset:0;opacity:0.05;
+    background-image:
+      linear-gradient(transparent 15px,rgba(255,255,255,0.02) 16px),
+      linear-gradient(90deg,transparent 15px,rgba(255,255,255,0.02) 16px);
+    background-size:80px 80px;
+  }
 
-  /* Background */
-  .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden}
-  .bg-img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(1.05);width:auto;height:120%;transition:transform 6s ease-out;filter:blur(5px) saturate(1.05)}
-  .bg-overlay{position:absolute;inset:0;background:var(--overlay-dark)}
-  .bg-lines{position:absolute;inset:0;opacity:0.05;background-image:linear-gradient(transparent 15px,rgba(255,255,255,0.02) 16px),linear-gradient(90deg,transparent 15px,rgba(255,255,255,0.02) 16px);background-size:80px 80px}
+  .container{
+    position:relative;
+    z-index:2;
+    max-width:1100px;
+    margin:0 auto;
+    padding:36px;
+  }
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:28px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .mark{
+    width:48px;
+    height:48px;
+    border-radius:8px;
+    background:var(--accent-1);
+    display:grid;
+    place-items:center;
+    font-weight:700;
+    color:white;
+    font-family: monospace;
+    font-size: 1.25rem;
+    user-select:none;
+  }
+  .logo h1{
+    margin:0;
+    font-size:20px;
+  }
+  .sub{
+    font-size:12px;
+    color:var(--muted);
+  }
 
-  .container{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:36px}
-  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}
-  .logo{display:flex;align-items:center;gap:12px}
-  .mark{width:48px;height:48px;border-radius:8px;background:var(--accent-1);display:grid;place-items:center;font-weight:700;color:white}
-  .logo h1{margin:0;font-size:20px}
-  .sub{font-size:12px;color:var(--muted)}
+  nav a{
+    color:var(--muted);
+    margin:0 8px;
+    font-size:14px;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: var(--accent-1);
+    width: 0;
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+  }
+  nav a:hover::after {
+    width: 100%;
+  }
 
-  nav a{color:var(--muted);margin:0 8px;font-size:14px}
-  .theme-control{position:relative;z-index:9999}
-  .chip-btn{background:var(--panel);border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px;cursor:pointer}
-  .chip-menu{position:absolute;right:0;top:44px;background:var(--panel);border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.6);display:none;min-width:200px;z-index:99999}
-  .chip-menu .group{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.05)}
-  .chip-menu button{width:100%;background:none;border:none;color:#e9f5ff;padding:8px;text-align:left;cursor:pointer;font-size:14px}
-  .chip-menu button:hover{background:rgba(255,255,255,0.05)}
+  .theme-control{
+    position:relative;
+    z-index:9999;
+  }
+  .chip-btn{
+    background:var(--panel);
+    border-radius:8px;
+    padding:6px 10px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    user-select:none;
+    transition: background 0.3s;
+  }
+  .chip-btn:hover{
+    background:var(--accent-1);
+  }
+  .chip-menu{
+    position:absolute;
+    right:0;
+    top:44px;
+    background:var(--panel);
+    border-radius:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    display:none;
+    min-width:200px;
+    z-index:99999;
+  }
+  .chip-menu .group{
+    padding:8px 10px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+  .chip-menu button{
+    width:100%;
+    background:none;
+    border:none;
+    color:#e9f5ff;
+    padding:8px;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition: background 0.3s;
+  }
+  .chip-menu button:hover{
+    background:rgba(255,255,255,0.05);
+  }
 
-  .hero{display:grid;grid-template-columns:1fr 350px;gap:28px;align-items:start}
-  @media(max-width:860px){.hero{grid-template-columns:1fr}}
-  .card{background:var(--panel);padding:18px;border-radius:8px;backdrop-filter: blur(4px)}
-  .about{display:grid;grid-template-columns:240px 1fr;gap:20px;align-items:center}
-  @media(max-width:760px){.about{grid-template-columns:1fr}}
-  .about img{width:100%;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.6)}
+  .hero{
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:28px;
+    align-items:start;
+  }
+  @media(max-width:860px){
+    .hero{
+      grid-template-columns:1fr;
+    }
+  }
+  .card{
+    background:var(--panel);
+    padding:18px;
+    border-radius:8px;
+    backdrop-filter: blur(4px);
+    margin-bottom: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,113,197,0.4);
+  }
+  .about{
+    display:grid;
+    grid-template-columns:240px 1fr;
+    gap:20px;
+    align-items:center;
+  }
+  @media(max-width:760px){
+    .about{
+      grid-template-columns:1fr;
+    }
+  }
+  .about img{
+    width:100%;
+    border-radius:8px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.6);
+  }
 
-  .btn{display:inline-block;padding:8px 14px;border-radius:6px;text-decoration:none;color:var(--btn-text);font-weight:600;background:var(--accent-1);transition:background 0.3s}
-  .btn:hover{background:var(--accent-2)}
+  .btn{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:6px;
+    text-decoration:none;
+    color:var(--btn-text);
+    font-weight:600;
+    background:var(--accent-1);
+    transition: background 0.3s, transform 0.3s;
+    user-select:none;
+  }
+  .btn:hover{
+    background:var(--accent-2);
+    transform: scale(1.05);
+  }
 
-  h2{margin:0 0 10px 0}
-  .experience-item{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;margin-bottom:12px}
-  .experience-item img{height:34px;width:auto}
+  h2{
+    margin:0 0 10px 0;
+  }
 
-  footer{margin-top:26px;padding:18px;border-radius:8px;background:rgba(255,255,255,0.02)}
-  .muted{color:var(--muted);font-size:14px}
+  .experience-item{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background:rgba(255,255,255,0.02);
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:12px;
+    transition: box-shadow 0.3s ease;
+  }
+  .experience-item:hover{
+    box-shadow: 0 10px 20px rgba(0,113,197,0.3);
+  }
+  .experience-item img{
+    height:34px;
+    width:auto;
+  }
+
+  footer{
+    margin-top:26px;
+    padding:18px;
+    border-radius:8px;
+    background:rgba(255,255,255,0.02);
+  }
+  .muted{
+    color:var(--muted);
+    font-size:14px;
+  }
+
+  /* Dynamic Bars for Graph placeholder */
+  .graph {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    height: 120px;
+    margin-top: 12px;
+  }
+  .bar {
+    width: 18px;
+    background: var(--accent-1);
+    border-radius: 4px 4px 0 0;
+    animation: barGrow 1s ease forwards;
+    transform-origin: bottom;
+  }
+  .bar:nth-child(1) { height: 30%; animation-delay: 0.1s;}
+  .bar:nth-child(2) { height: 50%; animation-delay: 0.3s;}
+  .bar:nth-child(3) { height: 70%; animation-delay: 0.5s;}
+  .bar:nth-child(4) { height: 90%; animation-delay: 0.7s;}
+  .bar:nth-child(5) { height: 60%; animation-delay: 0.9s;}
+  .bar:nth-child(6) { height: 80%; animation-delay: 1.1s;}
+  @keyframes barGrow {
+    from {transform: scaleY(0);}
+    to {transform: scaleY(1);}
+  }
+
+  /* GitHub feed placeholder */
+  #github-feed {
+    background: var(--panel);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  #github-feed h3 {
+    margin-top: 0;
+    color: var(--accent-1);
+  }
+  #github-feed ul {
+    list-style: none;
+    padding-left: 0;
+    max-height: 180px;
+    overflow-y: auto;
+  }
+  #github-feed li {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
 </style>
 </head>
 <body>
@@ -82,23 +337,23 @@
       <a href="#contact">Contact</a>
     </nav>
     <div class="theme-control">
-      <div class="chip-btn" id="chipBtn">
+      <div class="chip-btn" id="chipBtn" aria-haspopup="true" aria-expanded="false" role="button" tabindex="0">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dff6ff" stroke-width="1.2">
           <rect x="4" y="4" width="16" height="16" rx="2"></rect>
           <path d="M2 10h4M18 10h4M2 14h4M18 14h4M10 2v4M14 2v4M10 18v4M14 18v4" stroke-linecap="round"></path>
         </svg>
         Appearance
       </div>
-      <div class="chip-menu" id="chipMenu">
+      <div class="chip-menu" id="chipMenu" role="menu" aria-label="Appearance menu">
         <div class="group">
           <div class="muted">Theme</div>
-          <button data-act="theme" data-value="intel">Intel Blue</button>
-          <button data-act="theme" data-value="tsmc">TSMC Red</button>
+          <button data-act="theme" data-value="intel" role="menuitem">Intel Blue</button>
+          <button data-act="theme" data-value="tsmc" role="menuitem">TSMC Red</button>
         </div>
         <div class="group">
           <div class="muted">Background</div>
-          <button data-act="bg" data-value="wafer">Silicon Wafer</button>
-          <button data-act="bg" data-value="die">Chip Die</button>
+          <button data-act="bg" data-value="wafer" role="menuitem">Silicon Wafer</button>
+          <button data-act="bg" data-value="die" role="menuitem">Chip Die</button>
         </div>
       </div>
     </div>
@@ -106,13 +361,13 @@
 
   <section id="about" class="hero">
     <div class="card about">
-      <img src="photo.jpg" alt="Your photo">
+      <img src="photo.jpg" alt="Arush Karingala photo">
       <div>
         <h2>About Me</h2>
         <p class="muted">I am a PDK Engineer at Cadence Design Systems with a passion for VLSI and semiconductor technology...</p>
         <div style="margin-top:12px">
           <a href="resume.pdf" class="btn" download>Download Resume</a>
-          <a href="https://www.linkedin.com/in/arush-karingala" target="_blank" class="btn">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/arush-karingala" target="_blank" rel="noopener noreferrer" class="btn">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -127,7 +382,7 @@
   <section id="experience">
     <h2>Experience</h2>
     <div class="experience-item">
-      <a href="https://www.cadence.com" target="_blank"><img src="cadence.png" alt="Cadence logo"></a>
+      <a href="https://www.cadence.com" target="_blank" rel="noopener noreferrer"><img src="cadence.png" alt="Cadence logo"></a>
       <div>
         <h3>Cadence Design Systems <span class="muted">Jul 2024 – Present</span></h3>
         <ul>
@@ -138,7 +393,7 @@
       </div>
     </div>
     <div class="experience-item">
-      <a href="https://www.intel.com" target="_blank"><img src="intel.png" alt="Intel logo"></a>
+      <a href="https://www.intel.com" target="_blank" rel="noopener noreferrer"><img src="intel.png" alt="Intel logo"></a>
       <div>
         <h3>Intel Corporation <span class="muted">May 2023 – May 2024</span></h3>
         <ul>
@@ -151,35 +406,86 @@
 
   <section id="projects">
     <h2>Projects & Publications</h2>
-    <div class="card">Segmentation Of Biological Cells — IEEE publication.</div>
-    <div class="card">Analysis of CMOS Inverter — Sky130 PDK, Ngspice.</div>
+    <div class="card">
+      <strong>Analysis of VTC, MOS characteristics, noise analysis, power simulation of CMOS inverter.</strong>
+    </div>
+    <div class="card">
+      <strong>Vending machine in Verilog.</strong>
+      <p>Implemented vending machine using Verilog HDL in Xilinx Vivado.</p>
+    </div>
+    <div class="card">
+      <strong>Fall detector using IoT.</strong>
+      <p>Detects a fall and reports it via Google Firebase to a mobile app developed using Kodular rapid mobile app development utility.</p>
+    </div>
+    <div class="card">
+      <strong>Machine Learning Techniques to Predict the risk of Heart Attack.</strong>
+      <p>Served as a team leader at Advanced Academic Centre (AAC) to build an ML model using logistic regression to predict heart attack risk based on attributes like resting blood sugar and maximum heart rate.</p>
+    </div>
+
+    <!-- Dynamic Graph placeholder -->
+    <h3 style="margin-top:24px; color: var(--accent-1)">Skill Proficiency (Example)</h3>
+    <div class="graph" aria-label="Skill proficiency bar graph">
+      <div class="bar" style="height: 80%" title="VLSI: 80%"></div>
+      <div class="bar" style="height: 70%" title="Verilog: 70%"></div>
+      <div class="bar" style="height: 60%" title="Python: 60%"></div>
+      <div class="bar" style="height: 75%" title="Machine Learning: 75%"></div>
+      <div class="bar" style="height: 65%" title="IoT: 65%"></div>
+    </div>
+
+    <!-- GitHub feed placeholder -->
+    <div id="github-feed" aria-live="polite" aria-atomic="true">
+      <h3>GitHub Activity (Placeholder)</h3>
+      <ul>
+        <li>Updated project repo 'VLSI_PDK_Automation' — 2 days ago</li>
+        <li>Committed fixes to 'ML-HeartAttackPredictor' — 5 days ago</li>
+        <li>Opened pull request on 'IoT-FallDetector' — 1 week ago</li>
+      </ul>
+    </div>
   </section>
 
-  <footer id="contact">
-    <h2>Contact</h2>
-    <p class="muted">Email: ka22ecm3r01@student.nitw.ac.in</p>
-    <p class="muted">Phone: +91-7013065248</p>
+  <section id="contact" class="card">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:arush@example.com">arush@example.com</a></p>
+    <p>GitHub: <a href="https://github.com/arushkaringala" target="_blank" rel="noopener noreferrer">github.com/arushkaringala</a></p>
+  </section>
+
+  <footer>
+    <div class="muted">&copy; 2025 Arush Karingala. All rights reserved.</div>
   </footer>
 </div>
 
 <script>
-const chipBtn=document.getElementById('chipBtn');
-const chipMenu=document.getElementById('chipMenu');
-const bgImage=document.getElementById('bgImage');
-const backgrounds={wafer:'wafer.jpg',die:'die.jpg'};
-function applyTheme(theme){
-  if(theme==='tsmc'){
-    document.documentElement.style.setProperty('--accent-1','#A6262E');
-    document.documentElement.style.setProperty('--accent-2','#8B1E24');
-  } else {
-    document.documentElement.style.setProperty('--accent-1','#0071C5');
-    document.documentElement.style.setProperty('--accent-2','#005A9C');
-  }
-}
-function applyBackground(bg){bgImage.src=backgrounds[bg];}
-chipBtn.onclick=(e)=>{e.stopPropagation();chipMenu.style.display=chipMenu.style.display==='block'?'none':'block';};
-document.addEventListener('click',()=>chipMenu.style.display='none');
-document.querySelectorAll('.chip-menu button').forEach(b=>b.onclick=()=>{if(b.dataset.act==='theme')applyTheme(b.dataset.value);else applyBackground(b.dataset.value);chipMenu.style.display='none';});
+  // Animate background zoom on load
+  const bg = document.getElementById('bgImage');
+  setTimeout(() => {
+    bg.style.transform = 'translate(-50%, -50%) scale(1)';
+  }, 100);
+
+  // Toggle Appearance menu
+  const chipBtn = document.getElementById('chipBtn');
+  const chipMenu = document.getElementById('chipMenu');
+  chipBtn.addEventListener('click', () => {
+    const expanded = chipBtn.getAttribute('aria-expanded') === 'true';
+    chipBtn.setAttribute('aria-expanded', !expanded);
+    chipMenu.style.display = expanded ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!chipBtn.contains(e.target) && !chipMenu.contains(e.target)) {
+      chipMenu.style.display = 'none';
+      chipBtn.setAttribute('aria-expanded', false);
+    }
+  });
+
+  // Dummy theme/bg handlers (just demo)
+  chipMenu.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const act = btn.dataset.act;
+      const val = btn.dataset.value;
+      alert(`Change ${act} to ${val} - implement your logic here`);
+    });
+  });
 </script>
+
 </body>
 </html>
