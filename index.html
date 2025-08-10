@@ -11,49 +11,54 @@
 
 <style>
 :root{
-  --bg:#071027;
-  --panel: rgba(12,18,30,0.88);
-  --muted:#9fb0d0;
-  --text:#eaf3ff;
-  --accent:#00a8ff;
-  --accent-2:#00d4ff;
+  --bg-dark:#071027;
+  --bg-light:#f6f9fc;
+  --panel-dark: rgba(12,18,30,0.88);
+  --panel-light: rgba(255,255,255,0.95);
+  --muted-dark:#9fb0d0;
+  --muted-light:#506070;
+  --text-dark:#eaf3ff;
+  --text-light:#0b2233;
+  --accent-dark:#00a8ff;
+  --accent-light:#0077b6;
   --glass: rgba(255,255,255,0.03);
   --card-shadow: 0 10px 30px rgba(2,10,30,0.6);
   --radius:12px;
 }
-*{box-sizing:border-box}
 html,body{height:100%}
-body{
-  margin:0;
-  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;
-  background:var(--bg);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow-y:scroll;
-}
+body{margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;transition:background 0.3s,color 0.3s}
+
+/* theme variables (dark default) */
+body.dark{background:var(--bg-dark);color:var(--text-dark)}
+body.dark{--panel:var(--panel-dark);--muted:var(--muted-dark);--accent:var(--accent-dark);--text:var(--text-dark)}
+body.light{background:var(--bg-light);color:var(--text-light)}
+body.light{--panel:var(--panel-light);--muted:var(--muted-light);--accent:var(--accent-light);--text:var(--text-light)}
+
 a{color:var(--accent)}
 a:hover{text-decoration:underline}
 
-/* animated wafer / die background (decorative) */
+/* subtle wafer / die background layer (very low opacity so content stays readable) */
 body::before{
   content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6d/Microprocessor_die_photo.jpg');
-  background-size:cover; background-position:center; opacity:0.06;
-  filter:grayscale(20%) contrast(90%);
-  animation:dieShift 22s linear infinite;
+  background-size:cover; background-position:center; opacity:0.04; filter:grayscale(40%) contrast(85%);
+  transition:opacity .4s ease, filter .4s ease, transform .6s ease;
 }
-@keyframes dieShift{ from{transform:translateY(0)} to{transform:translateY(20px)} }
+body.light::before{opacity:0.03; filter:grayscale(10%) brightness(1.02) contrast(95%)}
 
-/* subtle grid overlay */
-.bg-grid{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.06}
+/* animated wafer sheen (subtle) */
+.wafer-sheen{position:fixed; inset:0; z-index:0; pointer-events:none; background:linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)); mix-blend-mode:overlay; opacity:0.7; transform:translateY(-10px); animation:sheenSlow 12s linear infinite}
+@keyframes sheenSlow{0%{transform:translateY(-10px)}50%{transform:translateY(10px)}100%{transform:translateY(-10px)}}
+
+/* subtle circuit trace SVG overlay */
+.bg-grid{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.05}
 .bg-grid svg{width:100%; height:100%}
 
+/* container and layout */
 .container{position:relative; z-index:2; max-width:1100px; margin:0 auto; padding:36px}
-
 header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px}
 .logo{display:flex; gap:12px; align-items:center}
-.mark{width:56px; height:56px; border-radius:10px; display:grid; place-items:center; font-weight:800; color:white; background:linear-gradient(180deg,var(--accent),var(--accent-2)); box-shadow:0 6px 20px rgba(0,168,255,0.14); font-size:20px; user-select:none}
+.mark{width:56px; height:56px; border-radius:10px; display:grid; place-items:center; font-weight:800; color:white; background:linear-gradient(180deg,var(--accent),color-mix(in srgb, var(--accent) 80%, black 10%)); box-shadow:0 6px 20px rgba(0,168,255,0.12); font-size:20px; user-select:none}
 .logo h1{margin:0; font-size:20px; letter-spacing:0.02em; color:var(--text)}
 .sub{font-size:12px; color:var(--muted)}
 
@@ -61,21 +66,26 @@ nav{display:flex; gap:12px; align-items:center}
 nav a{color:var(--muted); font-size:13px; font-weight:700; text-transform:uppercase; padding:8px 10px; border-radius:8px}
 nav a:hover{color:var(--accent); background:rgba(0,168,255,0.03)}
 
+/* theme toggle */
+.theme-toggle{position:absolute; top:18px; right:18px; z-index:5; display:flex; gap:8px; align-items:center}
+.toggle-btn{background:transparent;border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:10px; color:var(--muted); cursor:pointer}
+.toggle-btn:hover{background:rgba(255,255,255,0.02)}
+
 /* hero */
 .hero{display:grid; grid-template-columns:1fr 360px; gap:28px; align-items:center; min-height:420px}
 @media (max-width:880px){ .hero{grid-template-columns:1fr; text-align:center} .hero-photo{order:-1} }
 .hero-text h2{margin:0 0 8px 0; font-size:34px; color:var(--accent); font-weight:700}
 .hero-text p{margin:0 0 20px 0; color:var(--muted); font-size:16px; line-height:1.6; max-width:640px}
 .btn-group{display:flex; gap:14px; flex-wrap:wrap}
-.btn{display:inline-block; padding:10px 18px; border-radius:8px; font-weight:700; background:linear-gradient(180deg,var(--accent),var(--accent-2)); color:white; box-shadow: 0 8px 30px rgba(0,168,255,0.18); text-decoration:none}
+.btn{display:inline-block; padding:10px 18px; border-radius:8px; font-weight:700; background:linear-gradient(180deg,var(--accent),color-mix(in srgb, var(--accent) 70%, black 10%)); color:white; box-shadow: 0 8px 30px rgba(0,168,255,0.12); text-decoration:none}
 .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted)}
-.hero-photo img{width:100%; height:auto; border-radius:12px; box-shadow: 0 16px 40px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03); display:block}
+.hero-photo img{width:100%; height:auto; border-radius:12px; box-shadow: 0 16px 40px rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.03); display:block}
 .hero-photo{width:100%; max-width:360px; margin-left:auto}
 
-/* card */
+/* cards */
 .card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:20px 24px; border-radius: var(--radius); box-shadow: var(--card-shadow); margin-bottom:22px; border:1px solid rgba(255,255,255,0.03)}
 h2.section{margin:0 0 12px 0; font-size:20px; color:var(--accent); display:flex; align-items:center; gap:10px}
-.title-decor{width:40px; height:6px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:6px}
+.title-decor{width:40px; height:6px; background:linear-gradient(90deg,var(--accent),color-mix(in srgb, var(--accent) 70%, white 10%)); border-radius:6px}
 
 .experience-item{display:flex; gap:18px; align-items:flex-start; background: linear-gradient(180deg, rgba(0,168,255,0.02), transparent); padding:14px 16px; border-radius:12px; margin-bottom:14px; border:1px solid rgba(0,168,255,0.04)}
 .experience-item img{height:44px; width:auto; object-fit:contain}
@@ -100,7 +110,7 @@ h2.section{margin:0 0 12px 0; font-size:20px; color:var(--accent); display:flex;
 
 /* certifications */
 .cert-item{background:rgba(255,255,255,0.02); padding:12px 14px; margin-bottom:10px; border-radius:8px}
-.cert-item a{color:var(--accent-2); font-weight:700}
+.cert-item a{color:var(--accent); font-weight:700}
 
 /* contact */
 footer{margin-top:26px; padding:18px; border-radius:10px; background:linear-gradient(90deg, rgba(0,168,255,0.025), transparent); text-align:center; color:var(--muted); font-size:13px}
@@ -110,7 +120,7 @@ footer{margin-top:26px; padding:18px; border-radius:10px; background:linear-grad
   body{background:white; color:black}
   body::before{display:none}
   .bg-grid{display:none}
-  nav, .btn, .intro-overlay, footer{display:none}
+  nav, .btn, .intro-overlay, footer, .theme-toggle{display:none}
   .container{padding:0; max-width:none}
   .card{background:white; box-shadow:none; border:0; padding:0 0 12px 0}
   h1,h2{color:black}
@@ -122,9 +132,9 @@ footer{margin-top:26px; padding:18px; border-radius:10px; background:linear-grad
 
 </style>
 </head>
-<body>
+<body class="dark">
 
-<!-- decorative grid overlay -->
+<!-- decorative circuit traces grid (subtle svg) -->
 <div class="bg-grid" aria-hidden="true">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="none">
     <defs>
@@ -132,8 +142,6 @@ footer{margin-top:26px; padding:18px; border-radius:10px; background:linear-grad
     </defs>
     <rect width="100%" height="100%" fill="url(#g)"/>
     <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
-      <!-- vertical lines -->
-      <!-- generated in code when file served; static here for performance -->
       <line x1="80" y1="0" x2="80" y2="900" />
       <line x1="160" y1="0" x2="160" y2="900" />
       <line x1="240" y1="0" x2="240" y2="900" />
@@ -153,10 +161,20 @@ footer{margin-top:26px; padding:18px; border-radius:10px; background:linear-grad
       <line x1="1360" y1="0" x2="1360" y2="900" />
       <line x1="1440" y1="0" x2="1440" y2="900" />
     </g>
+
+    <!-- gentle pulse path (very subtle) -->
+    <path d="M40 700 C200 640, 360 720, 520 700 C680 680, 840 760, 1000 730" stroke="#00a8ff" stroke-opacity="0.04" stroke-width="2" fill="none"/>
   </svg>
 </div>
 
+<!-- faint wafer sheen -->
+<div class="wafer-sheen" aria-hidden="true"></div>
+
 <div class="container" role="main">
+  <div class="theme-toggle">
+    <button class="toggle-btn" id="themeBtn" aria-label="Toggle theme">Switch theme</button>
+  </div>
+
   <header>
     <div class="logo" aria-label="Website Logo and Name">
       <div class="mark" aria-hidden="true">A</div>
@@ -293,6 +311,25 @@ footer{margin-top:26px; padding:18px; border-radius:10px; background:linear-grad
 <script>
 // set year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// theme toggle state (persist in localStorage)
+(function(){
+  const btn = document.getElementById('themeBtn');
+  const current = localStorage.getItem('theme') || 'light';
+  document.body.classList.remove('dark','light');
+  document.body.classList.add(current);
+  if(btn) btn.textContent = current === 'dark' ? 'Light mode' : 'Dark mode';
+
+  if(btn){
+    btn.addEventListener('click', ()=>{
+      const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+      document.body.classList.remove('dark','light');
+      document.body.classList.add(next);
+      localStorage.setItem('theme', next);
+      btn.textContent = next === 'dark' ? 'Light mode' : 'Dark mode';
+    });
+  }
+})();
 
 // Projects content map (exact text provided by user)
 const projects = {
