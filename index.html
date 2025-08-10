@@ -4,16 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Arush K — VLSI Engineer</title>
-  <link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- replace with real favicon -->
-
-  <!-- Fonts -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
-  <!-- External libs (CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
-
   <style>
     :root{
       --bg:#0b0b0d;
@@ -21,61 +15,26 @@
       --accent:#00f0ff;
       --accent2:#ff2eff;
       --muted:#8b8b95;
-      --glass: rgba(255,255,255,0.03);
       --card-radius:14px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
-    body{background:var(--bg);color:#e6eef6;overflow-x:hidden}
-
-    /* PCB background canvas */
+    html,body{margin:0;font-family:Inter, system-ui, sans-serif;background:var(--bg);color:#e6eef6;overflow-x:hidden}
     #pcb-bg{position:fixed;inset:0;z-index:0}
-
-    .container{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:48px}
-
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+    .container{position:relative;z-index:2;max-width:1100px;margin:auto;padding:48px}
+    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px}
     .logo{display:flex;align-items:center;gap:12px}
     .logo .mark{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-family:'Share Tech Mono';font-weight:700}
-    .logo h1{margin:0;font-family:'Orbitron',sans-serif;letter-spacing:0.5px;font-size:18px}
-
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center;margin-bottom:64px}
-    .hero-left{padding:24px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--card-radius);box-shadow:0 6px 30px rgba(0,0,0,0.6)}
-    .hero h2{font-family:'Orbitron';margin:0;font-size:36px}
-    .typing{color:var(--accent);font-family:'Share Tech Mono';margin-top:8px}
-    .cta-row{margin-top:20px;display:flex;gap:12px}
-    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;cursor:pointer;color:inherit}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#061018;border:none;box-shadow:0 8px 30px rgba(0,240,255,0.06);}
-
-    /* Hero right: skill chart */
-    .card{background:var(--panel);padding:18px;border-radius:12px}
-
-    /* Projects */
-    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .project{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;padding:14px;transition:transform .28s, box-shadow .28s;cursor:pointer}
-    .project:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
-    .project .meta{font-size:13px;color:var(--muted);margin-top:8px}
-
-    /* GitHub ticker */
-    .ticker{overflow:hidden;background:var(--glass);padding:12px;border-radius:10px;white-space:nowrap}
-    .ticker-inner{display:inline-block;animation:scroll 18s linear infinite}
-    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-    /* Contact */
-    footer{margin-top:64px;padding:24px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
-
-    /* Responsive */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr}
-      .projects-grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:560px){
-      .projects-grid{grid-template-columns:1fr}
-      header{flex-direction:column;gap:12px}
-    }
-
-    /* small helper */
-    a.ghost{color:var(--muted);text-decoration:none}
+    .logo h1{margin:0;font-family:'Orbitron',sans-serif;font-size:20px}
+    nav a{color:var(--muted);text-decoration:none;margin:0 8px}
+    section{margin-bottom:60px}
+    .about{display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:center}
+    .about img{width:100%;border-radius:12px;box-shadow:0 0 20px rgba(0,240,255,0.3)}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;text-decoration:none;color:#000;background:linear-gradient(90deg,var(--accent),var(--accent2));font-weight:600;margin-right:10px}
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+    .project{background:var(--panel);padding:14px;border-radius:12px;transition:transform .28s;cursor:pointer}
+    .project:hover{transform:translateY(-6px);}
+    footer{padding:20px;background:var(--panel);border-radius:12px}
+    .experience-item{background:var(--panel);padding:14px;border-radius:12px;margin-bottom:14px}
   </style>
 </head>
 <body>
@@ -90,152 +49,97 @@
         </div>
       </div>
       <nav>
-        <a class="ghost" href="#projects">Projects</a> ·
-        <a class="ghost" href="#github">GitHub</a> ·
-        <a class="ghost" href="#contact">Contact</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
       </nav>
     </header>
 
-    <main>
-      <section class="hero">
-        <div class="hero-left card">
-          <h2>Hello — I build chips and tools that make chips possible.</h2>
-          <div class="typing" id="typing"></div>
-          <p style="color:var(--muted);margin-top:16px">I work on process design kits, flow automation, and verification. My focus: high-quality, silicon-ready deliverables.</p>
+    <section id="about" class="about">
+      <img src="photo.jpg" alt="Arush Karingala">
+      <div>
+        <h2>About Me</h2>
+        <p>I am a PDK Engineer at Cadence Design Systems with a passion for VLSI and semiconductor technology. I hold an M.Tech in ECE from NIT Warangal and have industry experience from my internship at Intel, where I worked on platform simulation and verification for cutting-edge graphics products.</p>
+        <a href="resume.pdf" class="btn" download>Download Resume</a>
+        <a href="https://www.linkedin.com/in/arush-karingala" target="_blank" class="btn">LinkedIn</a>
+      </div>
+    </section>
 
-          <div class="cta-row">
-            <button class="btn primary" id="enterBtn">Explore</button>
-            <a class="btn" href="/resume.pdf" download>Download Resume</a>
-          </div>
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience">
+      <h2>Experience</h2>
 
-          <div style="margin-top:18px">
-            <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Recent activity</div>
-            <div class="ticker" id="github-ticker"><div class="ticker-inner" id="tickerInner">Loading commits...</div></div>
-          </div>
+      <!-- Cadence -->
+      <!-- EXPERIENCE: Edit Cadence details below -->
+      <div class="experience-item">
+        <h3>Cadence Design Systems <span style="font-size:14px;color:var(--muted)">15 Jul 2024 – Present</span></h3>
+        <em>Role: PDK Engineer</em>
+        <ul>
+          <li>Work on various PDK collaterals from different foundries.</li>
+          <li>Perform QA testing and enablement for these deliverables.</li>
+          <li>Develop and maintain PV (Physical Verification) automation workflows.</li>
+        </ul>
+      </div>
+
+      <!-- Intel -->
+      <div class="experience-item">
+        <h3>Intel Corporation Pvt Ltd <span style="font-size:14px;color:var(--muted)">May 2023 – May 2024</span></h3>
+        <em>Role: Graduate Technical Intern</em>
+        <ul>
+          <li>Delivered behavioral and functional models for Intel’s Graphics products.</li>
+          <li>Led pre-silicon efforts to shift left post-silicon/power-on verification tests.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects & Publications</h2>
+      <div class="projects-grid">
+        <div class="project" onclick="window.open('https://ieeexplore.ieee.org/document/9917840','_blank')">
+          <h3>Segmentation Of Biological Cells</h3>
+          <p>IEEE publication on image processing techniques for cell segmentation.</p>
         </div>
-
-        <aside class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <strong>Skill Pulse</strong>
-            <small style="color:var(--muted)">hover nodes to explore</small>
-          </div>
-          <canvas id="skillsChart" width="400" height="260"></canvas>
-        </aside>
-      </section>
-
-      <section id="projects">
-        <h3 style="margin-bottom:12px">Selected Projects</h3>
-        <div class="projects-grid" id="projectsGrid">
-          <!-- project cards injected by JS -->
+        <div class="project">
+          <h3>Analysis of CMOS Inverter</h3>
+          <p>Used SkyWater SKY130 PDK & Ngspice to analyze VTC, MOS characteristics, and power simulations.</p>
         </div>
-      </section>
-
-      <section id="github" style="margin-top:36px">
-        <h3>GitHub</h3>
-        <div class="card" style="margin-top:12px;padding:12px">
-          <div id="repoList">Loading public repos...</div>
+        <div class="project">
+          <h3>Vending Machine in Verilog</h3>
+          <p>Implemented a vending machine using Verilog HDL in Xilinx Vivado.</p>
         </div>
-      </section>
-
-    </main>
+        <div class="project">
+          <h3>Fall Detector (IoT)</h3>
+          <p>Detects falls and sends alerts via Google Firebase to a mobile app.</p>
+        </div>
+        <div class="project">
+          <h3>Heart Attack Risk Prediction (ML)</h3>
+          <p>Built a logistic regression model to predict heart attack risk from health parameters.</p>
+        </div>
+      </div>
+    </section>
 
     <footer id="contact">
-      <h4>Contact</h4>
-      <p style="color:var(--muted)">Shoot me an email: <a href="mailto:arush@example.com">arush@example.com</a> or open an issue on any repo.</p>
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:ka22ecm3r01@student.nitw.ac.in">ka22ecm3r01@student.nitw.ac.in</a></p>
+      <p>Phone: +91-7013065248</p>
     </footer>
   </div>
 
   <script>
-    // ---- PCB background animation (simple luminous lines) ----
     const canvas = document.getElementById('pcb-bg');
     const ctx = canvas.getContext('2d');
-    let w, h, nodes = [];
-    function resize(){w = canvas.width = innerWidth; h = canvas.height = innerHeight; initNodes()}
-    window.addEventListener('resize', resize);
-    function initNodes(){nodes = []; const cols = Math.floor(w/160); const rows = Math.floor(h/140);
-      for(let x=0;x<cols;x++){for(let y=0;y<rows;y++){nodes.push({x: x*160+Math.random()*80, y: y*140+Math.random()*70, r: Math.random()*2+1, pulse: Math.random()*2+0.5})}}}
+    let w,h,nodes=[];
+    function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight;initNodes()}
+    window.addEventListener('resize',resize);
+    function initNodes(){nodes=[];const cols=Math.floor(w/160);const rows=Math.floor(h/140);
+      for(let x=0;x<cols;x++){for(let y=0;y<rows;y++){nodes.push({x:x*160+Math.random()*80,y:y*140+Math.random()*70,r:Math.random()*2+1,pulse:Math.random()*2+0.5})}}}
     function draw(){ctx.clearRect(0,0,w,h);
-      // draw connections
-      ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(0,240,255,0.04)';
-      for(let i=0;i<nodes.length;i++){const a=nodes[i]; for(let j=i+1;j<nodes.length;j++){const b=nodes[j]; const dx=a.x-b.x; const dy=a.y-b.y; const d=Math.hypot(dx,dy); if(d<140){ctx.globalAlpha=1-(d/140); ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();}}}
-      // draw nodes
-      nodes.forEach(n=>{n.pulse += 0.02; const rr = (Math.sin(n.pulse)+1.5)*n.r; const g = ctx.createLinearGradient(n.x-6,n.y-6,n.x+6,n.y+6); g.addColorStop(0,'rgba(0,240,255,0.12)'); g.addColorStop(1,'rgba(255,46,255,0.06)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(n.x,n.y,rr,0,Math.PI*2); ctx.fill();});
-      requestAnimationFrame(draw);
-    }
-    resize(); draw();
-
-    // ---- Typing effect (simple) ----
-    const lines = ["PDK Engineer.", "Automation & Verification.", "VLSI enthusiast."];
-    let li=0, ci=0, out=''; const typingEl = document.getElementById('typing');
-    function step(){const cur = lines[li]; if(ci<=cur.length){typingEl.textContent = cur.slice(0,ci) + (ci%2? ' _' : ''); ci++; setTimeout(step, 80);} else {setTimeout(()=>{ci=0; li=(li+1)%lines.length; setTimeout(step, 400)},1000)}}
-    step();
-
-    // ---- GSAP enter button smooth scroll ----
-    document.getElementById('enterBtn').addEventListener('click', ()=>{gsap.to(window,{duration:1.1,scrollTo:{y:document.querySelector('#projects').offsetTop-20}})});
-
-    // ---- Chart: skills radar (Chart.js) ----
-    window.addEventListener('load', ()=>{
-      const ctxS = document.getElementById('skillsChart').getContext('2d');
-      const skills = ['PDK Flow','SPICE','Automation','Python','SystemVerilog','Physical Design'];
-      const data = {labels:skills,datasets:[{label:'Skill level',data:[85,78,90,88,72,75],fill:true,backgroundColor:'rgba(0,240,255,0.06)',borderColor:'rgba(0,240,255,0.9)',pointBackgroundColor:'rgba(255,255,255,0.06)'}]};
-      new Chart(ctxS,{type:'radar',data:data,options:{scales:{r:{beginAtZero:true,max:100,grid:{color:'rgba(255,255,255,0.03)'}}},plugins:{legend:{display:false}}}});
-    });
-
-    // ---- Projects (demo data) ----
-    const projects = [
-      {title:'PDK Flow Automation',desc:'Automated PDK generation and checks for multi-corner validation.',repo:'https://github.com/arushkaringala/pdk-flow'},
-      {title:'Analog IP Suite',desc:'Library of analog building blocks with testbenches and models.',repo:'https://github.com/arushkaringala/analog-ip'},
-      {title:'TorqueNet',desc:'Internal EDA scripts for LVS/DRC reporting & dashboards.',repo:'https://github.com/arushkaringala/torquenet'},
-      {title:'ChipTestbench',desc:'Reusable SystemVerilog testbench templates with UVM-light.',repo:'https://github.com/arushkaringala/chip-testbench'},
-      {title:'Synthesis Helpers',desc:'Flow adapters and TCL helpers for synthesis flows.',repo:'https://github.com/arushkaringala/synth-helpers'},
-      {title:'Mini-SPICE',desc:'Lightweight spice runner and parser for simulation orchestration.',repo:'https://github.com/arushkaringala/mini-spice'}
-    ];
-    const grid = document.getElementById('projectsGrid');
-    projects.forEach(p=>{
-      const el = document.createElement('div'); el.className='project'; el.innerHTML = `<strong>${p.title}</strong><div class=meta>${p.desc}</div>`;
-      el.addEventListener('click', ()=>{window.open(p.repo,'_blank')}); grid.appendChild(el);
-    });
-
-    // ---- GitHub API: fetch public repos and recent commits ticker ----
-    const ghUser = 'arushkaringala'; // <---- change if needed
-    async function fetchGithub(){
-      try{
-        const r = await fetch(`https://api.github.com/users/${ghUser}/repos?per_page=100`);
-        const repos = await r.json();
-        if(Array.isArray(repos)){
-          const sorted = repos.sort((a,b)=>new Date(b.updated_at)-new Date(a.updated_at));
-          const listEl = document.getElementById('repoList'); listEl.innerHTML = '';
-          sorted.slice(0,10).forEach(repo=>{
-            const row = document.createElement('div'); row.style.padding='8px 6px'; row.style.borderBottom='1px solid rgba(255,255,255,0.02)';
-            row.innerHTML = `<a href='${repo.html_url}' target='_blank' style='font-weight:600;color:inherit;text-decoration:none'>${repo.name}</a> <div style='color:var(--muted);font-size:13px'>${repo.description||''}</div>`;
-            listEl.appendChild(row);
-          });
-
-          // build ticker from commit messages (slower) - we'll get recent commits per repo (rate-limited on GitHub)
-          const tickerInner = document.getElementById('tickerInner'); tickerInner.innerHTML='';
-          const promises = sorted.slice(0,6).map(async repo=>{
-            try{
-              const cm = await fetch(`https://api.github.com/repos/${ghUser}/${repo.name}/commits?per_page=3`);
-              const commits = await cm.json(); if(Array.isArray(commits)){
-                commits.slice(0,2).forEach(c=>{const m = c.commit.message.split('\n')[0]; tickerInner.innerHTML += `» ${repo.name}: ${m}    `});
-              }
-            }catch(e){/*ignore*/}
-          });
-          await Promise.all(promises);
-          if(!tickerInner.innerHTML) tickerInner.textContent='No public commits found yet.';
-        } else {document.getElementById('repoList').textContent='Failed to load GitHub data.'}
-      }catch(e){document.getElementById('repoList').textContent='Error loading GitHub.'}
-    }
-    fetchGithub();
-
-    // ---- Simple scroll-trigger reveal using GSAP ----
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray('section, header, footer').forEach((el,i)=>{
-      gsap.from(el,{y:20,autoAlpha:0,duration:0.9,delay: i*0.08,scrollTrigger:{trigger:el, start:'top 90%'}})
-    });
-
-    // ---- Small accessibility nicety: reduce motion if user prefers reduced motion ----
-    if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){gsap.globalTimeline.timeScale(0.5)}
+      ctx.lineWidth=1;ctx.strokeStyle='rgba(0,240,255,0.08)';
+      for(let i=0;i<nodes.length;i++){const a=nodes[i];for(let j=i+1;j<nodes.length;j++){const b=nodes[j];const dx=a.x-b.x;const dy=a.y-b.y;const d=Math.hypot(dx,dy);if(d<140){ctx.globalAlpha=1-(d/140);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
+      nodes.forEach(n=>{n.pulse+=0.02;const rr=(Math.sin(n.pulse)+1.5)*n.r;ctx.fillStyle='rgba(0,240,255,0.4)';ctx.beginPath();ctx.arc(n.x,n.y,rr,0,Math.PI*2);ctx.fill();});
+      requestAnimationFrame(draw);}
+    resize();draw();
   </script>
 </body>
 </html>
